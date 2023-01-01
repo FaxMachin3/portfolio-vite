@@ -1,0 +1,43 @@
+.indicators {
+    z-index: 1;
+    position: fixed;
+    top: 50%;
+    left: -0.2em;
+    transform: translateY(-50%);
+    height: 30%;
+    width: 3.5em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    list-style: none;
+
+    .bar {
+        width: 100%;
+        height: 0.3em;
+        border-radius: 0.3em;
+        transform-origin: left;
+        transform: scaleX(0.5);
+        transition: transform 500ms ease-in-out;
+    }
+}
+
+@media all and (max-width: 768px) {
+    .indicators{
+        top: initial;
+        left: initial;
+        transform: initial;
+        bottom: -0.2em;
+        right: 50%;
+        height: 7%;
+        width: 75%;
+        flex-direction: row;
+        align-items: flex-end;
+        transform: translateX(50%);
+        transform-origin: bottom !important; 
+        .bar{
+            width: 1%;
+            height: 4em;
+            transform-origin: bottom;
+        }
+    }
+}

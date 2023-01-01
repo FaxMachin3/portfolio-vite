@@ -1,0 +1,220 @@
+//mobile first
+.container-skill {
+    z-index: 5;
+    position: relative;
+    height: 80vh; // ie11 fallback
+    height: calc(var(--actual-height) - 20vh);
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    text-align: justify;
+    padding: 0 10vw;
+
+    .heading-skill {
+        position: relative;
+        font-size: 2rem;
+
+        h1{
+            font-weight: 500;
+            letter-spacing: .03rem;
+        }
+
+        .line-skill {
+            position: absolute;
+            width: 75%;
+            height: 2px;
+            border-radius: 10px;
+            bottom: 0;
+            left: 12.5%;
+        }
+    }
+
+    .left-container-skill {
+        .svg-skill {
+            width: 15em;
+            height: 15em;
+        }
+    }
+
+    .right-container-skill {
+        position: relative;
+        height: 40%;
+        width: 315px;
+        overflow: hidden;
+
+        .left-arrow-container-skill,
+        .right-arrow-container-skill {
+            cursor: pointer;
+            z-index: 1;
+            position: absolute;
+            height: 100%;
+            width: 15%;
+
+            .left-arrow-skill,
+            .right-arrow-skill {
+                position: absolute;
+                width: 2em;
+                height: 2em;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+        }
+
+        .left-arrow-container-skill {
+            top: 0;
+            left: -1em;
+
+            &:hover .left-arrow-skill{
+                opacity: 0.8;
+            }
+
+            .left-arrow-skill {
+                left: 25%;
+                transform: rotate(90deg) translateX(-30%);
+            }
+        }
+
+        .right-arrow-container-skill {
+            top: 0;
+            right: -1em;
+
+            &:hover .right-arrow-skill{
+                opacity: 0.8;
+            }
+
+            .right-arrow-skill {
+                right: 25%;
+                transform: rotate(-90deg) translateX(30%);
+            }
+        }
+
+        .slider-skill {
+            z-index: -1;
+            width: 315 * 4px;
+            height: 100%;
+            display: flex;
+            transition: transform 500ms ease-out;
+
+            .slide-skill {
+                width: 315px;
+                height: 100%;
+                display: flex;
+                border-radius: 5px;
+                flex-direction: column;
+                justify-content: space-evenly;
+                transition: opacity 250ms ease-out;
+
+                h2 {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    height: 20%;
+                    font-size: 1.3rem;
+                    word-spacing: 0.25rem;
+                    letter-spacing: .05rem;
+                }
+
+                p {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-evenly;
+                    align-items: center;
+                    height: 80%;
+
+                    span {
+                        font-size: 1rem;
+                        word-spacing: 0.25rem;
+                        letter-spacing: .05rem;
+                    }
+                }
+            }
+        }
+
+        .block-skill{
+            z-index: -5;
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 18%;
+            border-radius: 5px;
+        }
+    }
+}
+
+@media all and (min-width: 769px) {
+    .container-skill {
+        flex-direction: row-reverse;
+
+        .heading-skill {
+            display: none;
+        }
+
+        .left-arrow-container-skill,
+        .right-arrow-container-skill {
+            display: none;
+        }
+
+        .left-container-skill {
+            position: relative;
+            flex: 1 1;
+            height: 80% !important;
+
+            .svg-skill {
+                height: 17vw;
+                width: 17vw;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+        }
+
+        .right-container-skill {
+            flex: 2 2;
+            height: 80%;
+            width: initial;
+            overflow: initial;
+
+            .slider-skill {
+                flex-direction: column;
+                width: initial;
+
+                .slide-skill {
+                    width: initial;
+                    opacity: initial;
+
+                    h2 {
+                        font-size: 1.3vw;
+                        align-self: flex-start;
+                        margin: 2vw;
+                    }
+
+                    p {
+                        flex-direction: row;
+                        align-self: flex-start;
+                        justify-content: flex-start;
+                        margin: 0 5vw;
+                        width: 100%;
+                        
+                        span{
+                            display: inline-block;
+                            font-size: 1vw;
+                            margin-right: 8%;
+                        }
+                    }
+                }
+            }
+
+            .block-skill{
+                height: 100%;
+                width: 15%;
+                top: 2%;
+                left: -2em;
+                border-radius: 10px;
+            }
+        }
+    }
+}
