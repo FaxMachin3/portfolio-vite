@@ -1,9 +1,8 @@
-import React, { useRef, useEffect, useContext } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { gsap, Power2 } from 'gsap';
 import './ProjectStyle.scss';
 
-import Loader from '../loader/Loader';
-
+import { ANCHORS } from '../../common/constants';
 import ProjectSVGCode from './ProjectSVGCode';
 import ProjectSVGWebsite from './ProjectSVGWebsite';
 import Arrow from '../../common/Arrow';
@@ -13,9 +12,7 @@ import MyPortfolio from '../../assests/images/myPortfolio.jpg';
 import BookMyEvent from '../../assests/images/bookMyEvent.jpg';
 import APS from '../../assests/images/APS.jpg';
 
-import projectAnimate from './ProjectAnimate';
-
-const Project = (props) => {
+const Project = ({ setSectionRefs }) => {
     const large = useRef(window.matchMedia('(min-width: 769px)').matches);
     const slideCountProject = useRef(0);
     const allowClick = useRef(true);
@@ -23,7 +20,6 @@ const Project = (props) => {
     const textSliderWidth = useRef(0);
     const textSliderHeight = useRef(0);
 
-    const containerProject = useRef(null);
     const headingProject = useRef(null);
     const lineProject = useRef(null);
     const leftContainerProject = useRef(null);
@@ -33,12 +29,12 @@ const Project = (props) => {
     const rightArrowProject = useRef(null);
     const textSliderProject = useRef(null);
     const imageSliderProject = useRef(null);
-    const linksProject = useRef([]);
-    const textSlidesProject = useRef([]);
-    const textSlidesProjectH2 = useRef([]);
-    const textSlidesProjectPara = useRef([]);
-    const imageSlidesProject = useRef([]);
-    const imageProject = useRef([]);
+    const linksProject = useRef(new Array(5));
+    const textSlidesProject = useRef(new Array(5));
+    const textSlidesProjectH2 = useRef(new Array(5));
+    const textSlidesProjectPara = useRef(new Array(5));
+    const imageSlidesProject = useRef(new Array(5));
+    const imageProject = useRef(new Array(5));
 
     const animateTextProject = (heading, para, links, prevCount) => {
         const timelineText = gsap.timeline({
@@ -232,17 +228,17 @@ const Project = (props) => {
             image.addEventListener('load', () => {
                 const loaderCircles = image.previousElementSibling.childNodes;
 
-                props.theme
-                    ? loaderCircles.forEach((circle) => {
-                          setTimeout(() => {
-                              circle.style.backgroundColor = '#A13251';
-                          }, 75);
-                      })
-                    : loaderCircles.forEach((circle) => {
-                          setTimeout(() => {
-                              circle.style.backgroundColor = '#008F96';
-                          }, 75);
-                      });
+                // props.theme
+                //     ? loaderCircles.forEach((circle) => {
+                //           setTimeout(() => {
+                //               circle.style.backgroundColor = '#A13251';
+                //           }, 75);
+                //       })
+                //     : loaderCircles.forEach((circle) => {
+                //           setTimeout(() => {
+                //               circle.style.backgroundColor = '#008F96';
+                //           }, 75);
+                //       });
 
                 image.style.opacity = '1';
 
@@ -251,7 +247,7 @@ const Project = (props) => {
                 }, 500);
             });
         });
-    }, [props.theme]);
+    }, []);
 
     useEffect(() => {
         changeSlideProject([leftArrowProject, rightArrowProject]);
@@ -263,52 +259,25 @@ const Project = (props) => {
         textSliderHeight.current =
             rightContainerProject.current.getBoundingClientRect().height;
 
-        // projectAnimate([
-        //     textSlidesProjectH2,
-        //     textSlidesProjectPara,
-        //     blockProject,
-        //     imageSlidesProject,
-        //     headingProject,
-        //     lineProject,
-        //     containerProject,
-        //     leftArrowProject,
-        //     rightArrowProject,
-        //     linksProject,
-        //     rightContainerProject,
-        // ]);
-        // eslint-disable-next-line
-    }, []);
-
-    // intersection observer for lazy loading
-    useEffect(() => {
-        const imageProject = window.document.querySelectorAll('.image-project');
-
-        const options = {
-            root: leftContainerProject.current,
-        };
-
-        const lazyObserver = new IntersectionObserver(
-            (entries, lazyObserver) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        entry.target.src = entry.target.dataset.src;
-                        lazyObserver.unobserve(entry.target);
-                    }
-                }, options);
-            }
-        );
-
-        imageProject.forEach((slide) => {
-            lazyObserver.observe(slide);
-        });
+        setSectionRefs((prevSectionRefs) => ({
+            ...prevSectionRefs,
+            [ANCHORS[3]]: [
+                textSlidesProjectH2,
+                textSlidesProjectPara,
+                blockProject,
+                imageSlidesProject,
+                headingProject,
+                lineProject,
+                leftArrowProject,
+                rightArrowProject,
+                linksProject,
+                rightContainerProject,
+            ],
+        }));
     }, []);
 
     return (
-        <div
-            ref={containerProject}
-            className="container-project container"
-            data-section="project"
-        >
+        <div className="container-project container" data-section="project">
             <div className="heading-project">
                 <h1 ref={headingProject}>Project</h1>
 
@@ -332,72 +301,67 @@ const Project = (props) => {
 
                 <div ref={imageSliderProject} className="image-slider-project">
                     <div
-                        ref={(el) => imageSlidesProject.current.push(el)}
+                        ref={(el) => (imageSlidesProject.current[0] = el)}
                         className="image-container-project"
                     >
-                        <Loader image={0} />
                         <img
-                            ref={(el) => imageProject.current.push(el)}
+                            ref={(el) => (imageProject.current[0] = el)}
                             className="image-project"
-                            src=""
+                            loading="lazy"
                             alt="socialize"
-                            data-src={Socialize}
+                            src={Socialize}
                         />
                     </div>
 
                     <div
-                        ref={(el) => imageSlidesProject.current.push(el)}
+                        ref={(el) => (imageSlidesProject.current[1] = el)}
                         className="image-container-project"
                     >
-                        <Loader image={1} />
                         <img
-                            ref={(el) => imageProject.current.push(el)}
+                            ref={(el) => (imageProject.current[1] = el)}
                             className="image-project mobile-image-project"
-                            src=""
+                            loading="lazy"
                             alt="arizona public service"
-                            data-src={APS}
+                            src={APS}
                         />
                     </div>
 
                     <div
-                        ref={(el) => imageSlidesProject.current.push(el)}
+                        ref={(el) => (imageSlidesProject.current[2] = el)}
                         className="image-container-project"
                     >
-                        <Loader image={2} />
                         <img
-                            ref={(el) => imageProject.current.push(el)}
+                            ref={(el) => (imageProject.current[2] = el)}
                             className="image-project mobile-image-project"
-                            src=""
+                            loading="lazy"
                             alt="portfolio"
-                            data-src={MyPortfolio}
+                            src={MyPortfolio}
                         />
                     </div>
 
                     <div
-                        ref={(el) => imageSlidesProject.current.push(el)}
+                        ref={(el) => (imageSlidesProject.current[3] = el)}
                         className="image-container-project"
                     >
-                        <Loader image={3} />
                         <img
-                            ref={(el) => imageProject.current.push(el)}
+                            ref={(el) => (imageProject.current[3] = el)}
                             className="image-project"
-                            src=""
+                            loading="lazy"
                             alt="dark weather"
-                            data-src={DarkWeather}
+                            src={DarkWeather}
                         />
                     </div>
 
                     <div
-                        ref={(el) => imageSlidesProject.current.push(el)}
+                        ref={(el) => (imageSlidesProject.current[4] = el)}
                         className="image-container-project"
                     >
-                        <Loader image={4} />
                         <img
-                            ref={(el) => imageProject.current.push(el)}
+                            ref={(el) => (imageProject.current[4] = el)}
                             className="image-project"
-                            src=""
+                            loading="lazy"
                             alt="book my event"
-                            data-src={BookMyEvent}
+                            src={BookMyEvent}
                         />
                     </div>
                 </div>
@@ -409,20 +373,24 @@ const Project = (props) => {
             >
                 <div ref={textSliderProject} className="text-slider-project">
                     <div
-                        ref={(el) => textSlidesProject.current.push(el)}
+                        ref={(el) => (textSlidesProject.current[0] = el)}
                         className="text-slide-project"
                     >
-                        <h2 ref={(el) => textSlidesProjectH2.current.push(el)}>
+                        <h2 ref={(el) => (textSlidesProjectH2.current[0] = el)}>
                             Socialize:
                         </h2>
 
-                        <p ref={(el) => textSlidesProjectPara.current.push(el)}>
+                        <p
+                            ref={(el) =>
+                                (textSlidesProjectPara.current[0] = el)
+                            }
+                        >
                             Responsive, full stack, social-networking web app
                             built using MERN stack with love.
                         </p>
 
                         <div
-                            ref={(el) => linksProject.current.push(el)}
+                            ref={(el) => (linksProject.current[0] = el)}
                             className="links-project"
                         >
                             <div>
@@ -445,14 +413,18 @@ const Project = (props) => {
                     </div>
 
                     <div
-                        ref={(el) => textSlidesProject.current.push(el)}
+                        ref={(el) => (textSlidesProject.current[1] = el)}
                         className="text-slide-project"
                     >
-                        <h2 ref={(el) => textSlidesProjectH2.current.push(el)}>
+                        <h2 ref={(el) => (textSlidesProjectH2.current[1] = el)}>
                             Arizona Public Service:
                         </h2>
 
-                        <p ref={(el) => textSlidesProjectPara.current.push(el)}>
+                        <p
+                            ref={(el) =>
+                                (textSlidesProjectPara.current[1] = el)
+                            }
+                        >
                             Cross-platform mobile app built using Xamarin
                             native. I worked on Xamarin iOS fornt-end and
                             integration; and integration of Microsoft's App
@@ -460,7 +432,7 @@ const Project = (props) => {
                         </p>
 
                         <div
-                            ref={(el) => linksProject.current.push(el)}
+                            ref={(el) => (linksProject.current[1] = el)}
                             className="links-project"
                         >
                             <div>
@@ -478,20 +450,24 @@ const Project = (props) => {
                     </div>
 
                     <div
-                        ref={(el) => textSlidesProject.current.push(el)}
+                        ref={(el) => (textSlidesProject.current[2] = el)}
                         className="text-slide-project"
                     >
-                        <h2 ref={(el) => textSlidesProjectH2.current.push(el)}>
+                        <h2 ref={(el) => (textSlidesProjectH2.current[2] = el)}>
                             My Portfolio:
                         </h2>
 
-                        <p ref={(el) => textSlidesProjectPara.current.push(el)}>
+                        <p
+                            ref={(el) =>
+                                (textSlidesProjectPara.current[2] = el)
+                            }
+                        >
                             I made this to improve and practice my front-end
                             skills. This was made using React.js (Hooks).
                         </p>
 
                         <div
-                            ref={(el) => linksProject.current.push(el)}
+                            ref={(el) => (linksProject.current[2] = el)}
                             className="links-project"
                         >
                             <div>
@@ -511,21 +487,25 @@ const Project = (props) => {
                     </div>
 
                     <div
-                        ref={(el) => textSlidesProject.current.push(el)}
+                        ref={(el) => (textSlidesProject.current[3] = el)}
                         className="text-slide-project"
                     >
-                        <h2 ref={(el) => textSlidesProjectH2.current.push(el)}>
+                        <h2 ref={(el) => (textSlidesProjectH2.current[3] = el)}>
                             Dark Weather:
                         </h2>
 
-                        <p ref={(el) => textSlidesProjectPara.current.push(el)}>
+                        <p
+                            ref={(el) =>
+                                (textSlidesProjectPara.current[3] = el)
+                            }
+                        >
                             A small dark themed weather app built using Python's
                             tkinter Library. Just enter a city or a country name
                             to get the weather report.
                         </p>
 
                         <div
-                            ref={(el) => linksProject.current.push(el)}
+                            ref={(el) => (linksProject.current[3] = el)}
                             className="links-project"
                         >
                             <div>
@@ -543,21 +523,25 @@ const Project = (props) => {
                     </div>
 
                     <div
-                        ref={(el) => textSlidesProject.current.push(el)}
+                        ref={(el) => (textSlidesProject.current[4] = el)}
                         className="text-slide-project"
                     >
-                        <h2 ref={(el) => textSlidesProjectH2.current.push(el)}>
+                        <h2 ref={(el) => (textSlidesProjectH2.current[4] = el)}>
                             Book My Event:
                         </h2>
 
-                        <p ref={(el) => textSlidesProjectPara.current.push(el)}>
+                        <p
+                            ref={(el) =>
+                                (textSlidesProjectPara.current[4] = el)
+                            }
+                        >
                             This is pure, non-responsive-spaghetti code as this
                             was the first college project I just made to have a
                             taste of web development.
                         </p>
 
                         <div
-                            ref={(el) => linksProject.current.push(el)}
+                            ref={(el) => (linksProject.current[4] = el)}
                             className="links-project"
                         >
                             <div>

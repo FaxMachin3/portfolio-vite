@@ -29,6 +29,8 @@ $animationDelayLinks: 50ms;
         flex-wrap: wrap;
 
         .link {
+            cursor: pointer;
+            color: var(--primary);
             position: relative;
             text-transform: uppercase;
             font-size: 1vw;
@@ -39,6 +41,7 @@ $animationDelayLinks: 50ms;
             will-change: transform, color;
 
             &.active {
+                color: var(--secondary);
                 transform: scale(2);
                 transition-delay: 500ms;
 
@@ -48,6 +51,7 @@ $animationDelayLinks: 50ms;
             }
 
             &:hover {
+                color: var(--secondary);
                 opacity: 0.8;
             }
         }
@@ -59,6 +63,7 @@ $animationDelayLinks: 50ms;
         font-size: 2.1vw;
         font-weight: 500;
         a {
+            color: var(--primary);
             text-decoration: none;
         }
     }
@@ -71,15 +76,21 @@ $animationDelayLinks: 50ms;
             background-color: transparent;
         }
     }
+
     .hamburger {
+        margin-top: 0.5rem;
         z-index: 10;
         height: 3rem;
-        width: 4rem;
+        width: 3.5rem;
         position: absolute;
         top: 50%;
         right: 5%;
         transform: translateY(-50%);
         cursor: pointer;
+
+        .ham {
+            background-color: var(--primary);
+        }
 
         .upper-layer,
         .middle-layer,
@@ -96,17 +107,17 @@ $animationDelayLinks: 50ms;
 
         .nav-circle {
             position: absolute;
-            transform: translateY(-50%);
+            background-color: var(--secondary);
             height: 150rem;
             width: 150rem;
             border-radius: 50%;
-            transform: translate(-20em, -140em);
+            transform: translate(-20rem, -140rem);
             pointer-events: none;
             transition: transform $animationDuration ease-in-out,
                 background-color $animationDuration - 250ms ease-in-out;
             will-change: transform, background-color;
             &.animate-hamburger {
-                transform: translate(-100em, -18em);
+                transform: translate(-100rem, -18rem);
             }
         }
 
@@ -116,15 +127,16 @@ $animationDelayLinks: 50ms;
         }
 
         .upper-layer.animate-hamburger {
-            transform: translateY(1.2em) rotate(45deg);
+            transform: translateY(1rem) rotate(45deg);
         }
 
         .lower-layer.animate-hamburger {
-            transform: translateY(-1.2em) rotate(-45deg);
+            transform: translateY(-1rem) rotate(-45deg);
         }
     }
 
     .nav-links {
+        height: 90vh !important;
         position: fixed;
         z-index: 10;
         top: 13%;
@@ -210,6 +222,7 @@ $animationDelayLinks: 50ms;
         font-size: 2em !important;
 
         &.active {
+            color: var(--primary) !important;
             transition-delay: 0ms !important;
 
             &:hover {
@@ -218,6 +231,7 @@ $animationDelayLinks: 50ms;
         }
 
         &:hover {
+            color: var(--primary) !important;
             opacity: 1;
         }
     }

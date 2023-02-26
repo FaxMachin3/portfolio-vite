@@ -1,13 +1,13 @@
-import React, { useContext, useRef, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { gsap, Power2 } from 'gsap';
 
 import './SkillStyle.scss';
 
-import skillAnimate from './SkillAnimate';
+import { ANCHORS } from '../../common/constants';
 import SkillSVG from './SkillSVG';
 import Arrow from '../../common/Arrow';
 
-const Skill = () => {
+const Skill = ({ setSectionRefs }) => {
     const slideCountSkill = useRef(0);
     const allowClick = useRef(true);
 
@@ -16,13 +16,12 @@ const Skill = () => {
     const leftArrowSkill = useRef(null);
     const rightArrowSkill = useRef(null);
     const sliderSkill = useRef(null);
-    const slidesSkill = useRef([]);
-    const slidesSkillH2 = useRef([]);
-    const slidesSkillPara = useRef([]);
+    const slidesSkill = useRef(new Array(4));
+    const slidesSkillH2 = useRef(new Array(4));
+    const slidesSkillPara = useRef(new Array(4));
     const rightContainerSkill = useRef(null);
     const blockSkill = useRef(null);
     const imgSkill = useRef(null);
-    const containerSkill = useRef(null);
 
     const animateTextSkill = (heading, para) => {
         const timelineText = gsap.timeline({
@@ -123,27 +122,24 @@ const Skill = () => {
     useEffect(() => {
         changeSlideSkill([leftArrowSkill, rightArrowSkill]);
 
-        // skillAnimate([
-        //     slidesSkillH2,
-        //     slidesSkillPara,
-        //     blockSkill,
-        //     imgSkill,
-        //     headingSkill,
-        //     lineSkill,
-        //     containerSkill,
-        //     leftArrowSkill,
-        //     rightArrowSkill,
-        //     rightContainerSkill,
-        // ]);
-        // eslint-disable-next-line
+        setSectionRefs((prevSectionRefs) => ({
+            ...prevSectionRefs,
+            [ANCHORS[2]]: [
+                slidesSkillH2,
+                slidesSkillPara,
+                blockSkill,
+                imgSkill,
+                headingSkill,
+                lineSkill,
+                leftArrowSkill,
+                rightArrowSkill,
+                rightContainerSkill,
+            ],
+        }));
     }, []);
 
     return (
-        <div
-            ref={containerSkill}
-            className="container-skill containers"
-            data-section="skill"
-        >
+        <div className="container-skill container" data-section="skill">
             <div className="heading-skill">
                 <h1 ref={headingSkill}>Skill</h1>
 
@@ -170,13 +166,13 @@ const Skill = () => {
 
                 <div ref={sliderSkill} className="slider-skill">
                     <div
-                        ref={(el) => slidesSkill.current.push(el)}
+                        ref={(el) => (slidesSkill.current[0] = el)}
                         className="slide-skill active-slide-skill"
                     >
-                        <h2 ref={(el) => slidesSkillH2.current.push(el)}>
+                        <h2 ref={(el) => (slidesSkillH2.current[0] = el)}>
                             Programming Languages:
                         </h2>
-                        <p ref={(el) => slidesSkillPara.current.push(el)}>
+                        <p ref={(el) => (slidesSkillPara.current[0] = el)}>
                             <span>C#</span>
                             <span>Python</span>
                             <span>Javascript</span>
@@ -184,13 +180,13 @@ const Skill = () => {
                     </div>
 
                     <div
-                        ref={(el) => slidesSkill.current.push(el)}
+                        ref={(el) => (slidesSkill.current[1] = el)}
                         className="slide-skill"
                     >
-                        <h2 ref={(el) => slidesSkillH2.current.push(el)}>
+                        <h2 ref={(el) => (slidesSkillH2.current[1] = el)}>
                             Backend:
                         </h2>
-                        <p ref={(el) => slidesSkillPara.current.push(el)}>
+                        <p ref={(el) => (slidesSkillPara.current[1] = el)}>
                             <span>Microsoft DotNet</span>
                             <span>MySQL</span>
                             <span>MongoDB</span>
@@ -200,13 +196,13 @@ const Skill = () => {
                     </div>
 
                     <div
-                        ref={(el) => slidesSkill.current.push(el)}
+                        ref={(el) => (slidesSkill.current[2] = el)}
                         className="slide-skill"
                     >
-                        <h2 ref={(el) => slidesSkillH2.current.push(el)}>
+                        <h2 ref={(el) => (slidesSkillH2.current[2] = el)}>
                             Frontend:
                         </h2>
-                        <p ref={(el) => slidesSkillPara.current.push(el)}>
+                        <p ref={(el) => (slidesSkillPara.current[2] = el)}>
                             <span>HTML5 + CSS3</span>
                             <span>SASS</span>
                             <span>React + Redux</span>
@@ -216,13 +212,13 @@ const Skill = () => {
                     </div>
 
                     <div
-                        ref={(el) => slidesSkill.current.push(el)}
+                        ref={(el) => (slidesSkill.current[3] = el)}
                         className="slide-skill"
                     >
-                        <h2 ref={(el) => slidesSkillH2.current.push(el)}>
+                        <h2 ref={(el) => (slidesSkillH2.current[3] = el)}>
                             Dev Tools & Other Skills:
                         </h2>
-                        <p ref={(el) => slidesSkillPara.current.push(el)}>
+                        <p ref={(el) => (slidesSkillPara.current[3] = el)}>
                             <span>Git/ Github (Version Control)</span>
                             <span>Figma/ Adobe XD (Design)</span>
                         </p>

@@ -1,170 +1,85 @@
-import React, { useEffect, useContext } from 'react';
+import { useState } from 'react';
+import { LINK, SLIDE_DELAY } from '../../common/constants';
+import useThrottle from '../../hooks/useThrottle';
+import ToggleButton from '../button/ToggleButton';
 
 import './NavbarStyle.scss';
 
-import { smoothScrollNav } from './SmoothScrollNav';
-import ToggleButton from '../button/ToggleButton';
+const Navbar = ({ destination, setDestination, theme, setTheme }) => {
+    const [hamOpen, setHamOpen] = useState(false);
 
-const Navbar = (props) => {
-    const removeClass = () => {
-        const liS = window.document.querySelectorAll('.nav-links li');
-        const navCircle = window.document.querySelector('.nav-circle');
-        const hams = window.document.querySelectorAll('.ham');
-        const links = window.document.querySelectorAll('.link');
-        const navLink = window.document.querySelector('.nav-links');
-        const logo = window.document.querySelector('.logo');
+    const onLinkClick = useThrottle((e) => {
+        const anchor = e.target.dataset.section ?? '';
 
-        if (!props.scroll.current) {
-            props.scroll.current = !props.scroll.current;
-        }
+        if (anchor.length < 1) return;
+        setDestination(anchor);
+        setHamOpen((prevState) => !prevState);
+        window.location.hash = `#${anchor}`;
+    }, SLIDE_DELAY);
 
-        logo.classList.remove('animate-hamburger');
-        navCircle.classList.remove('animate-hamburger');
-        navLink.classList.remove('animate-hamburger');
-        hams.forEach((ham) => {
-            ham.classList.remove('animate-hamburger');
-        });
-        links.forEach((link) => {
-            link.classList.remove('animate-hamburger');
-        });
-        liS.forEach((li) => {
-            li.classList.remove('animate-hamburger');
-        });
+    const onHamburgerClick = () => {
+        setHamOpen((prevState) => !prevState);
     };
-
-    useEffect(() => {
-        const links = window.document.querySelectorAll('.link');
-
-        links.forEach((link) => {
-            const activeLink = link.getAttribute('class').split(' ')[2];
-            link.style.color = primary;
-            if (activeLink === 'active') {
-                window.matchMedia('(min-width: 769px)').matches
-                    ? (link.style.color = secondary)
-                    : (link.style.color = primary);
-            }
-        });
-    });
-
-    useEffect(() => {
-        const hamburger = window.document.querySelector('.hamburger');
-        const liS = window.document.querySelectorAll('.nav-links li');
-        const navCircle = window.document.querySelector('.nav-circle');
-        const hams = window.document.querySelectorAll('.ham');
-        const links = window.document.querySelectorAll('.link');
-        const navLink = window.document.querySelector('.nav-links');
-        const logo = window.document.querySelector('.logo');
-
-        hamburger.addEventListener('click', (e) => {
-            props.scroll.current = !props.scroll.current;
-            logo.classList.toggle('animate-hamburger');
-            navCircle.classList.toggle('animate-hamburger');
-            navLink.classList.toggle('animate-hamburger');
-            hams.forEach((ham) => {
-                ham.classList.toggle('animate-hamburger');
-            });
-            links.forEach((link) => {
-                link.classList.toggle('animate-hamburger');
-            });
-            liS.forEach((li) => {
-                li.classList.toggle('animate-hamburger');
-            });
-        });
-        // eslint-disable-next-line
-    }, []);
-
-    // smooth scroll
-    useEffect(() => {
-        const links = window.document.querySelectorAll('.link');
-        const logo = window.document.querySelector('.logo');
-
-        logo.addEventListener('click', (e) => {
-            props.hashCheck.current = false;
-            smoothScrollNav(e, props);
-            removeClass();
-            setTimeout(() => {
-                props.hashCheck.current = true;
-            }, 1000);
-        });
-
-        links.forEach((link) => {
-            link.addEventListener('click', (e) => {
-                props.hashCheck.current = false;
-                smoothScrollNav(e, props);
-                removeClass();
-                setTimeout(() => {
-                    props.hashCheck.current = true;
-                }, 1000);
-            });
-        });
-
-        return () => {
-            logo.removeEventListener('click', (e) => smoothScrollNav(e, props));
-            links.forEach((link) => {
-                link.removeEventListener('click', (e) =>
-                    smoothScrollNav(e, props)
-                );
-            });
-        };
-        // eslint-disable-next-line
-    }, []);
-
-    useEffect(() => {
-        const navBar = window.document.querySelectorAll('.link');
-        const intersectingSection = '#' + props.currentPage.split('.')[1];
-
-        navBar.forEach((link) => {
-            link.classList.remove('active');
-            link.style.color = primary;
-            if (link.getAttribute('href') === intersectingSection) {
-                link.classList.add('active');
-                window.matchMedia('(min-width: 769px)').matches
-                    ? (link.style.color = secondary)
-                    : (link.style.color = primary);
-            }
-        });
-        // eslint-disable-next-line
-    }, [props.currentPage]);
 
     return (
         <nav className="nav-bar">
-            <h1 className="logo">
+            <h1 className={`logo  ${hamOpen ? 'animate-hamburger' : ''}`}>
                 <a href="#home">SR</a>
             </h1>
-            <div className="hamburger">
-                <div className="nav-circle"></div>
-                <div className="ham upper-layer"></div>
-                <div className="ham middle-layer"></div>
-                <div className="ham lower-layer"></div>
+
+            <div className="hamburger" onClick={onHamburgerClick}>
+                <div
+                    className={`nav-circle ${
+                        hamOpen ? 'animate-hamburger' : ''
+                    }`}
+                ></div>
+                <div
+                    className={`ham upper-layer ${
+                        hamOpen ? 'animate-hamburger' : ''
+                    }`}
+                ></div>
+                <div
+                    className={`ham middle-layer ${
+                        hamOpen ? 'animate-hamburger' : ''
+                    }`}
+                ></div>
+                <div
+                    className={`ham lower-layer ${
+                        hamOpen ? 'animate-hamburger' : ''
+                    }`}
+                ></div>
             </div>
-            <ul className="nav-links">
-                <li>
-                    <a className="home link active" href="#home">
-                        Home
-                    </a>
-                </li>
-                <li>
-                    <a className="about link" href="#about">
-                        About
-                    </a>
-                </li>
-                <li>
-                    <a className="skill link" href="#skill">
-                        Skill
-                    </a>
-                </li>
-                <li>
-                    <a className="project link" href="#project">
-                        Project
-                    </a>
-                </li>
-                <li>
-                    <a className="contact link" href="#contact">
-                        Contact
-                    </a>
-                </li>
-                <li className="toggle-button">
-                    <ToggleButton />
+
+            <ul
+                className={`nav-links  ${hamOpen ? 'animate-hamburger' : ''}`}
+                onClick={onLinkClick}
+            >
+                {LINK.map(({ text, anchor }) => (
+                    <li
+                        className={`${hamOpen ? 'animate-hamburger' : ''}`}
+                        key={anchor}
+                    >
+                        <a
+                            className={`${anchor} link ${
+                                destination === anchor ? 'active' : ''
+                            }`}
+                            data-section={anchor}
+                        >
+                            {text}
+                        </a>
+                    </li>
+                ))}
+
+                <li
+                    className={`toggle-button ${
+                        hamOpen ? 'animate-hamburger' : ''
+                    }`}
+                >
+                    <ToggleButton
+                        setHamOpen={setHamOpen}
+                        theme={theme}
+                        setTheme={setTheme}
+                    />
                 </li>
             </ul>
         </nav>

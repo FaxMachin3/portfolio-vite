@@ -1,26 +1,18 @@
-import React, { useState, useEffect, useRef, useContext } from 'react';
+import React from 'react';
+import { THEME } from '../../common/constants';
 import './ToggleButton.scss';
 
-const ToggleButton = () => {
-    let toggleButton = useRef(null);
-    let toggleButtonCircle = useRef(null);
-
-    // change background
-    useEffect(() => {
-        toggleButton.current.addEventListener('click', () => {
-            changeTheme((prevState) => (prevState = !prevState));
-        });
-
-        return () => {
-            toggleButton.current.removeEventListener('click', () => {
-                changeTheme((prevState) => (prevState = !prevState));
-            });
-        };
-    }, []);
+const ToggleButton = ({ setHamOpen, theme, setTheme }) => {
+    const onToggleClick = () => {
+        setHamOpen((prevState) => !prevState);
+        setTheme((prevTheme) =>
+            prevTheme === THEME.DARK ? THEME.LIGHT : THEME.DARK
+        );
+    };
 
     return (
-        <div className="outer" ref={toggleButton}>
-            <div className="inner" ref={toggleButtonCircle}></div>
+        <div className="outer" onClick={onToggleClick}>
+            <div className={`inner ${theme === THEME.LIGHT ? 'circle' : ''}`} />
         </div>
     );
 };

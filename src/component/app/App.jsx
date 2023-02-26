@@ -1,49 +1,64 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactFullpage from '@fullpage/react-fullpage';
-
-import Home from '../home/Home';
-import About from '../about/About';
-import Skill from '../skill/Skill';
-import Project from '../project/Project';
-import Contact from '../contact/Contact';
+import {
+    SECTIONS,
+    SLIDE_DELAY,
+    ANCHORS,
+    THEME,
+    DEFAULT_SECTION_REFS,
+} from '../../common/constants';
+import Error from '../error/Error';
+import Indicators from '../indicators/Indicators';
+import Navbar from '../navbar/Navbar';
+import useAnimate from '../../hooks/useAnimate';
+import useTheme from '../../hooks/useTheme';
 
 import './App.scss';
 
 const App = () => {
-    return (
-        <ReactFullpage
-            licenseKey={'YOUR_KEY_HERE'}
-            scrollingSpeed={1000} /* Options here */
-            anchors={['home', 'about', 'skill', 'project', 'contact']}
-            // onLeave={(data) => console.log('onLeave', { data })}
-            // afterLoad={(data) => console.log('afterLoad', { data })}
-            // afterSlideLoad={(data) => console.log('afterSlideLoad', { data })}
-            dragAndMove
-            navigation
-            render={({ state, fullpageApi }) => {
-                console.log('app', { state, fullpageApi });
+    const [theme, setTheme] = useState(THEME.DARK);
+    const [destination, setDestination] = useState(ANCHORS[0]);
+    const [sectionRefs, setSectionRefs] = useState(DEFAULT_SECTION_REFS);
 
-                return (
+    useTheme(theme);
+    useAnimate(destination, sectionRefs);
+
+    return (
+        <Error>
+            <Navbar
+                destination={destination}
+                setDestination={setDestination}
+                theme={theme}
+                setTheme={setTheme}
+            />
+            <Indicators
+                destination={destination}
+                setDestination={setDestination}
+            />
+            <ReactFullpage
+                licenseKey={'YOUR_KEY_HERE'}
+                scrollingSpeed={SLIDE_DELAY}
+                anchors={ANCHORS}
+                onLeave={(_origin, destination, _direction) =>
+                    setDestination(destination.anchor)
+                }
+                dragAndMove
+                navigation
+                render={(rfpProps) => (
                     <ReactFullpage.Wrapper>
-                        <section className="section">
-                            <Home />
-                        </section>
-                        <section className="section">
-                            <About />
-                        </section>
-                        <section className="section">
-                            <Skill />
-                        </section>
-                        <section className="section">
-                            <Project />
-                        </section>
-                        <section className="section">
-                            <Contact />
-                        </section>
+                        {SECTIONS.map(({ Component, anchor }) => (
+                            <section key={anchor} className="section">
+                                <Component
+                                    destination={destination}
+                                    setSectionRefs={setSectionRefs}
+                                    {...rfpProps}
+                                />
+                            </section>
+                        ))}
                     </ReactFullpage.Wrapper>
-                );
-            }}
-        />
+                )}
+            />
+        </Error>
     );
 };
 

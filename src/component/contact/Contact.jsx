@@ -1,40 +1,37 @@
 import React, { useRef, useEffect } from 'react';
 import './ContactStyle.scss';
 
-import contactAnimate from './ContactAnimate';
+import { ANCHORS } from '../../common/constants';
 import ContactSVG from './ContactSVG';
 import ContactSVGInstagram from './ContactSVGInstagram';
 import ContactSVGLinkedin from './ContactSVGLinkedin';
 import ContactSVGFacebook from './ContactSVGFacebook';
 import ContactSVGGithub from './ContactSVGGithub';
 
-const Contact = () => {
-    const containerContact = useRef(null);
+const Contact = ({ setSectionRefs }) => {
     const headingContact = useRef(null);
     const lineContact = useRef(null);
     const bottomContainerContact = useRef(null);
     const leftContainerContact = useRef(null);
-    const linksContact = useRef([]);
-    const textContact = useRef([]);
+    const linksContact = useRef(new Array(4));
+    const textContact = useRef(new Array(4));
 
     useEffect(() => {
-        // contactAnimate([
-        //     containerContact,
-        //     headingContact,
-        //     lineContact,
-        //     bottomContainerContact,
-        //     leftContainerContact,
-        //     linksContact,
-        //     textContact,
-        // ]);
+        setSectionRefs((prevSectionRefs) => ({
+            ...prevSectionRefs,
+            [ANCHORS[4]]: [
+                headingContact,
+                lineContact,
+                bottomContainerContact,
+                leftContainerContact,
+                linksContact,
+                textContact,
+            ],
+        }));
     }, []);
 
     return (
-        <div
-            ref={containerContact}
-            className="container-contact container"
-            data-section="contact"
-        >
+        <div className="container-contact container" data-section="contact">
             <div ref={headingContact} className="heading-contact">
                 <h1>Contact</h1>
 
@@ -49,7 +46,7 @@ const Contact = () => {
                 </div>
 
                 <div className="right-container-contact">
-                    <p ref={(el) => textContact.current.push(el)}>
+                    <p ref={(el) => (textContact.current[0] = el)}>
                         <span>Email:</span>{' '}
                         <a
                             href="mailto:subhamraj4114@gmail.com?Subject=Hello!"
@@ -58,7 +55,7 @@ const Contact = () => {
                             subhamraj4114@gmail.com
                         </a>
                     </p>
-                    <p ref={(el) => textContact.current.push(el)}>
+                    <p ref={(el) => (textContact.current[1] = el)}>
                         <span>Phone:</span>{' '}
                         <a href="tel:8260602263">+91 826-060-2263</a>
                     </p>
@@ -72,7 +69,7 @@ const Contact = () => {
                 <div className="top-half-bottom-container-contact">
                     <div
                         ref={(el) => {
-                            linksContact.current.push(el);
+                            linksContact.current[0] = el;
                         }}
                     >
                         <div>
@@ -95,7 +92,7 @@ const Contact = () => {
 
                     <div
                         ref={(el) => {
-                            linksContact.current.push(el);
+                            linksContact.current[1] = el;
                         }}
                     >
                         <div>
@@ -120,7 +117,7 @@ const Contact = () => {
                 <div className="bottom-half-bottom-container-contact">
                     <div
                         ref={(el) => {
-                            linksContact.current.push(el);
+                            linksContact.current[2] = el;
                         }}
                     >
                         <div>
@@ -143,7 +140,7 @@ const Contact = () => {
 
                     <div
                         ref={(el) => {
-                            linksContact.current.push(el);
+                            linksContact.current[3] = el;
                         }}
                     >
                         <div>

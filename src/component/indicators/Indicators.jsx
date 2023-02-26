@@ -1,15 +1,29 @@
-import React, { useContext } from 'react';
+import { useState } from 'react';
+import { INDICATORS } from '../../common/constants';
+import { SLIDE_DELAY } from '../../common/constants';
+import useThrottle from '../../hooks/useThrottle';
 
 import './IndicatorsStyle.scss';
 
-const Indicators = () => {
+const Indicators = ({ destination, setDestination }) => {
+    const onIndicatorClick = useThrottle((e) => {
+        const anchor = e.target.dataset.section ?? '';
+
+        if (anchor.length < 1) return;
+
+        setDestination(anchor);
+        window.location.hash = `#${anchor}`;
+    }, SLIDE_DELAY);
+
     return (
-        <ul className="indicators">
-            <li className="bar" data-section="home"></li>
-            <li className="bar" data-section="about"></li>
-            <li className="bar" data-section="skill"></li>
-            <li className="bar" data-section="project"></li>
-            <li className="bar" data-section="contact"></li>
+        <ul className="indicators" onClick={onIndicatorClick}>
+            {INDICATORS.map((ind) => (
+                <li
+                    key={ind}
+                    className={`bar ${destination === ind ? 'active' : ''}`}
+                    data-section={ind}
+                ></li>
+            ))}
         </ul>
     );
 };

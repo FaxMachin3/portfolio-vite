@@ -1,6 +1,8 @@
-import { gsap, Power2 } from "gsap";
+import { gsap, Power2 } from 'gsap';
 
-const projectAnimate = args => {
+const projectAnimate = (args) => {
+    if (args.length === 0) return;
+
     const [
         textSlidesProjectH2,
         textSlidesProjectPara,
@@ -8,11 +10,10 @@ const projectAnimate = args => {
         imageSlidesProject,
         headingProject,
         lineProject,
-        containerProject,
         leftArrowProject,
         rightArrowProject,
         linksProject,
-        rightContainerProject
+        rightContainerProject,
     ] = args;
 
     const xTrans =
@@ -23,67 +24,51 @@ const projectAnimate = args => {
             duration: 1,
             autoAlpha: 0,
             ease: Power2.easeInOut,
-            pointerEvents: "none"
-        }
+            pointerEvents: 'none',
+        },
     });
 
-    window.matchMedia("(min-width: 769px)").matches
+    window.matchMedia('(min-width: 769px)').matches
         ? timelineProject
               .from(imageSlidesProject.current, { scale: 0 })
               .from(
                   textSlidesProjectH2.current,
                   { y: 100, stagger: { each: 0.1 } },
-                  "-=1"
+                  '-=1'
               )
               .from(
                   textSlidesProjectPara.current,
                   { y: 100, stagger: { each: 0.1 } },
-                  "-=1.3"
+                  '-=1.3'
               )
-              .from(linksProject.current, { y: 100 }, "-=1.3")
-              .from(blockProject.current, { x: -xTrans, scaleX: 0 }, "-=0.8")
+              .from(linksProject.current, { y: 100 }, '-=1.3')
+              .from(blockProject.current, { x: -xTrans, scaleX: 0 }, '-=0.8')
               .from(
                   [leftArrowProject.current, rightArrowProject.current],
                   {},
-                  "-=1.3"
+                  '-=1.3'
               )
         : timelineProject
               .from(lineProject.current, { x: 100 })
-              .from(headingProject.current, {}, "-=1")
-              .from(imageSlidesProject.current, { scale: 0 }, "-=1")
+              .from(headingProject.current, {}, '-=1')
+              .from(imageSlidesProject.current, { scale: 0 }, '-=1')
               .from(
                   textSlidesProjectH2.current,
                   { y: 100, stagger: { each: 0.1 } },
-                  "-=1"
+                  '-=1'
               )
               .from(
                   textSlidesProjectPara.current,
                   { y: 100, stagger: { each: 0.1 } },
-                  "-=1.3"
+                  '-=1.3'
               )
-              .from(linksProject.current, { y: 100 }, "-=1.3")
-              .from(blockProject.current, { x: -xTrans, scaleX: 0 }, "-=0.8")
+              .from(linksProject.current, { y: 100 }, '-=1.3')
+              .from(blockProject.current, { x: -xTrans, scaleX: 0 }, '-=0.8')
               .from(
                   [leftArrowProject.current, rightArrowProject.current],
                   {},
-                  "-=1"
+                  '-=1'
               );
-
-    const observerProject = new IntersectionObserver(
-        (entries, observerProject) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    timelineProject.play();
-                    // observerProject.unobserve(entry.target)
-                } else {
-                    timelineProject.restart();
-                    timelineProject.pause();
-                }
-            });
-        }
-    );
-
-    observerProject.observe(containerProject.current);
 };
 
 export default projectAnimate;
