@@ -2,8 +2,6 @@
 .container-about {
     z-index: 5;
     position: relative;
-    height: 80vh; // ie11 fallback
-    height: calc(var(--actual-height) - 20vh);
     width: 100vw;
     display: flex;
     flex-direction: column;
@@ -33,8 +31,8 @@
 
     .left-container-about {
         position: relative;
-        height: 13em;
-        width: 13em;
+        height: 13rem;
+        width: 13rem;
         border: 2px dashed;
         border-radius: 50%;
 

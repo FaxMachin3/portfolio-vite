@@ -2,7 +2,6 @@
 .container-home {
     height: 80%;
     width: 100vw;
-    position: absolute;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -34,12 +33,12 @@
 
         .button-home {
             display: flex;
-            height: 4em;
+            height: 4rem;
             justify-content: space-evenly;
             align-items: center;
             padding-bottom: 1.5rem;
 
-            a{
+            a {
                 display: flex;
             }
 
@@ -48,11 +47,11 @@
                 cursor: pointer;
                 color: inherit;
                 border: none;
-                height: 2em;
-                width: 6em;
+                height: 2rem;
+                width: 6rem;
                 border-radius: 15px;
                 position: relative;
-                font-size: 0.6em;
+                font-size: 0.6rem;
 
                 span {
                     position: absolute;
@@ -76,8 +75,8 @@
     .arrow-container-home {
         position: relative;
         cursor: pointer;
-        height: 4em;
-        width: 4em;
+        height: 4rem;
+        width: 4rem;
 
         &:hover .arrow-home {
             opacity: 0.8;
@@ -88,8 +87,8 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            height: 2em;
-            width: 2em;
+            height: 2rem;
+            width: 2rem;
         }
     }
 }
@@ -108,7 +107,7 @@
         }
 
         .left-container-home {
-            padding-top: 1.5em;
+            padding-top: 1.5rem;
             display: flex;
             flex-direction: column;
             justify-content: space-evenly;
@@ -146,7 +145,7 @@
             }
 
             .work-button {
-                margin-right: 3em;
+                margin-right: 3rem;
             }
         }
 

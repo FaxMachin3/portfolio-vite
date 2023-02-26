@@ -7,7 +7,7 @@
     box-sizing: border-box;
 }
 
-body {
+html,body {
     height: 100%;
     width: 100%;
     background-color: #121212;
@@ -35,9 +35,9 @@ body {
 }
 
 .circle-loader {
-    height: 2em;
-    width: 2em;
-    margin: 1em;
+    height: 2rem;
+    width: 2rem;
+    margin: 1rem;
     border-radius: 50%;
     border: 2px solid;
     transition: background-color 300ms ease-in-out;
@@ -150,7 +150,7 @@ body {
 .bottom-container-error span {
     display: inline-block;
     color: #a13251;
-    padding-right: 0.5em;
+    padding-right: 0.5rem;
 }
 
 @media all and (min-width: 769px) {

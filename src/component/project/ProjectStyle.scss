@@ -2,8 +2,6 @@
 .container-project {
     z-index: 5;
     position: relative;
-    height: 80vh; // ie11 fallback
-    height: calc(var(--actual-height) - 20vh);
     width: 100vw;
     display: flex;
     flex-direction: column;
@@ -48,8 +46,8 @@
             .left-arrow-project,
             .right-arrow-project {
                 position: absolute;
-                width: 2em;
-                height: 2em;
+                width: 2rem;
+                height: 2rem;
                 top: 50%;
                 transform: translateY(-50%);
 
@@ -61,7 +59,7 @@
 
         .left-arrow-container-project {
             top: 0;
-            left: -1.5em;
+            left: -1.5rem;
 
             &:hover .left-arrow-project {
                 opacity: 0.8;
@@ -75,7 +73,7 @@
 
         .right-arrow-container-project {
             top: 0;
-            right: -1.5em;
+            right: -1.5rem;
 
             &:hover .right-arrow-project {
                 opacity: 0.8;
@@ -118,8 +116,8 @@
                     top: 50%;
                     left: 50%;
                     transform: translate(-50%, -50%);
-                    height: 15em;
-                    width: 23em;
+                    height: 15rem;
+                    width: 23rem;
                     opacity: 0;
                     transition: opacity 500ms ease-in-out 300ms;
                 }
@@ -147,7 +145,7 @@
             .text-slide-project {
                 height: 100%;
                 width: 315px;
-                padding: 2em;
+                padding: 2rem;
                 display: flex;
                 flex-direction: column;
                 justify-content: space-between;
@@ -175,9 +173,9 @@
                     .svg-website-project,
                     .svg-code-project {
                         cursor: pointer;
-                        margin-right: 9em;
-                        height: 2.5em;
-                        width: 2.5em;
+                        margin-right: 9rem;
+                        height: 2.5rem;
+                        width: 2.5rem;
 
                         &:hover {
                             opacity: 0.8;
@@ -212,11 +210,11 @@
             width: 40%;
 
             .left-arrow-container-project {
-                left: -1em;
+                left: -1rem;
             }
 
             .right-arrow-container-project {
-                right: -1em;
+                right: -1rem;
             }
 
             .image-slider-project {
@@ -243,10 +241,10 @@
             width: 50%;
 
             .text-slider-project {
-                height: 100 * 5%;
+                height: calc(100 * 5%);
                 width: 100%;
                 flex-direction: column;
-                transform: translateY(-20 * 0%);
+                transform: translateY(-20%);
                 transition-duration: 0s;
                 transition-delay: 1s;
 

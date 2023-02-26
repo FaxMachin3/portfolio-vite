@@ -2,7 +2,6 @@
 .container-error {
     z-index: 5;
     position: relative;
-    height: calc(var(--actual-height) - 30vh);
     width: 100vw;
     display: flex;
     flex-direction: column;
@@ -49,7 +48,7 @@
             font-size: 1.1rem;
             span {
                 display: inline-block;
-                padding-right: 0.5em;
+                padding-right: 0.5rem;
             }
         }
     }
