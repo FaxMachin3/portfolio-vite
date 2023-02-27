@@ -4,7 +4,7 @@ import './ToggleButton.scss';
 
 const ToggleButton = ({ setHamOpen, theme, setTheme }) => {
     const onToggleClick = () => {
-        setHamOpen((prevState) => !prevState);
+        setHamOpen(false);
         setTheme((prevTheme) =>
             prevTheme === THEME.DARK ? THEME.LIGHT : THEME.DARK
         );

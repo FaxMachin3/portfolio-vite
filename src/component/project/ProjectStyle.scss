@@ -184,6 +184,7 @@
         }
 
         .block-project {
+            background-color: var(--secondary);
             z-index: -5;
             position: absolute;
             top: 0;
@@ -242,7 +243,6 @@
                 height: calc(100 * 5%);
                 width: 100%;
                 flex-direction: column;
-                transform: translateY(-20%);
                 transition-duration: 0s;
                 transition-delay: 1s;
 

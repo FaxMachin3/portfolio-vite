@@ -3,7 +3,7 @@ import { THEME_STYLE } from '../common/constants';
 
 const useTheme = (theme) => {
     useEffect(() => {
-        document.body.setAttribute('style', THEME_STYLE[theme]);
+        document.documentElement.setAttribute('style', THEME_STYLE[theme]);
     }, [theme]);
 };
 

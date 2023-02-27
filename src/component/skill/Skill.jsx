@@ -1,15 +1,15 @@
-import React, { useRef, useEffect } from 'react';
-import { gsap, Power2 } from 'gsap';
+import React, { useRef, useEffect, useState } from 'react';
+import useThrottle from '../../hooks/useThrottle';
+import { ANCHORS, SKILLS, SLIDE_DELAY } from '../../common/constants';
+import SkillSVG from './SkillSVG';
+import Arrow from '../../common/Arrow';
+import useSkillSlideAnimate from '../../hooks/useSkillSlideAnimate';
 
 import './SkillStyle.scss';
 
-import { ANCHORS } from '../../common/constants';
-import SkillSVG from './SkillSVG';
-import Arrow from '../../common/Arrow';
-
 const Skill = ({ setSectionRefs }) => {
-    const slideCountSkill = useRef(0);
-    const allowClick = useRef(true);
+    const [currentSlide, setCurrentSlide] = useState(0);
+    const [arrowClicked, setArrowClicked] = useState(false);
 
     const lineSkill = useRef(null);
     const headingSkill = useRef(null);
@@ -23,105 +23,7 @@ const Skill = ({ setSectionRefs }) => {
     const blockSkill = useRef(null);
     const imgSkill = useRef(null);
 
-    const animateTextSkill = (heading, para) => {
-        const timelineText = gsap.timeline({
-            defaults: { opacity: 0, duration: 0.75, ease: Power2.easeInOut },
-        });
-
-        gsap.to(blockSkill.current, {
-            duration: 0.15,
-            x: -5,
-            ease: Power2.easeOut,
-        });
-        gsap.to(blockSkill.current, {
-            duration: 0.15,
-            x: 0,
-            delay: 0.15,
-            ease: Power2.easeOut,
-        });
-
-        timelineText.from(heading, { delay: 0.3 }).from(
-            para,
-            {
-                y: 100,
-                stagger: {
-                    each: 0.05,
-                },
-            },
-            '-=0.65'
-        );
-    };
-
-    const selectTextSkill = (count, arrow) => {
-        if (count === 4) {
-            animateTextSkill(
-                slidesSkillH2.current[0],
-                Array.from(slidesSkillPara.current[0].childNodes)
-            );
-        } else if (count === -1) {
-            animateTextSkill(
-                slidesSkillH2.current[3],
-                Array.from(slidesSkillPara.current[3].childNodes)
-            );
-        } else {
-            animateTextSkill(
-                slidesSkillH2.current[count],
-                Array.from(slidesSkillPara.current[count].childNodes)
-            );
-        }
-    };
-
-    const changeSlideSkill = (args) => {
-        const [leftArrow, rightArrow] = args;
-
-        leftArrow.current.addEventListener('click', (event) => {
-            if (allowClick.current && slideCountSkill.current > 0) {
-                allowClick.current = !allowClick.current;
-
-                slideCountSkill.current--;
-
-                selectTextSkill(slideCountSkill.current, 'left');
-
-                if (slideCountSkill.current <= -1) {
-                    slideCountSkill.current = 3;
-                }
-
-                sliderSkill.current.style.transform = `translateX(-${
-                    315 * slideCountSkill.current
-                }px)`;
-
-                setTimeout(() => {
-                    allowClick.current = !allowClick.current;
-                }, 1100);
-            }
-        });
-
-        rightArrow.current.addEventListener('click', () => {
-            if (allowClick.current && slideCountSkill.current < 3) {
-                allowClick.current = !allowClick.current;
-
-                slideCountSkill.current++;
-
-                selectTextSkill(slideCountSkill.current);
-
-                if (slideCountSkill.current >= 4) {
-                    slideCountSkill.current = 0;
-                }
-
-                sliderSkill.current.style.transform = `translateX(-${
-                    315 * slideCountSkill.current
-                }px)`;
-
-                setTimeout(() => {
-                    allowClick.current = !allowClick.current;
-                }, 1100);
-            }
-        });
-    };
-
     useEffect(() => {
-        changeSlideSkill([leftArrowSkill, rightArrowSkill]);
-
         setSectionRefs((prevSectionRefs) => ({
             ...prevSectionRefs,
             [ANCHORS[2]]: [
@@ -138,6 +40,28 @@ const Skill = ({ setSectionRefs }) => {
         }));
     }, []);
 
+    useSkillSlideAnimate(
+        currentSlide,
+        slidesSkillH2,
+        slidesSkillPara,
+        blockSkill,
+        arrowClicked
+    );
+
+    const onArrowClick = (inc) => {
+        return useThrottle((_e) => {
+            setArrowClicked(true);
+            setCurrentSlide((prevCount) => {
+                const newCount = prevCount + inc;
+
+                if (newCount < 0) return 0;
+                if (newCount >= SKILLS.length) return SKILLS.length - 1;
+
+                return newCount;
+            });
+        }, SLIDE_DELAY);
+    };
+
     return (
         <div className="container-skill container" data-section="skill">
             <div className="heading-skill">
@@ -153,76 +77,51 @@ const Skill = ({ setSectionRefs }) => {
             <div ref={rightContainerSkill} className="right-container-skill">
                 <div
                     ref={leftArrowSkill}
+                    onClick={onArrowClick(-1)}
                     className="left-arrow-container-skill"
                 >
                     <Arrow className="left-arrow-skill" />
                 </div>
+
                 <div
                     ref={rightArrowSkill}
+                    onClick={onArrowClick(1)}
                     className="right-arrow-container-skill"
                 >
                     <Arrow className="right-arrow-skill" />
                 </div>
 
-                <div ref={sliderSkill} className="slider-skill">
-                    <div
-                        ref={(el) => (slidesSkill.current[0] = el)}
-                        className="slide-skill active-slide-skill"
-                    >
-                        <h2 ref={(el) => (slidesSkillH2.current[0] = el)}>
-                            Programming Languages:
-                        </h2>
-                        <p ref={(el) => (slidesSkillPara.current[0] = el)}>
-                            <span>C#</span>
-                            <span>Python</span>
-                            <span>Javascript</span>
-                        </p>
-                    </div>
-
-                    <div
-                        ref={(el) => (slidesSkill.current[1] = el)}
-                        className="slide-skill"
-                    >
-                        <h2 ref={(el) => (slidesSkillH2.current[1] = el)}>
-                            Backend:
-                        </h2>
-                        <p ref={(el) => (slidesSkillPara.current[1] = el)}>
-                            <span>Microsoft DotNet</span>
-                            <span>MySQL</span>
-                            <span>MongoDB</span>
-                            <span>Node.js</span>
-                            <span>Express.js</span>
-                        </p>
-                    </div>
-
-                    <div
-                        ref={(el) => (slidesSkill.current[2] = el)}
-                        className="slide-skill"
-                    >
-                        <h2 ref={(el) => (slidesSkillH2.current[2] = el)}>
-                            Frontend:
-                        </h2>
-                        <p ref={(el) => (slidesSkillPara.current[2] = el)}>
-                            <span>HTML5 + CSS3</span>
-                            <span>SASS</span>
-                            <span>React + Redux</span>
-                            <span>GSAP</span>
-                            <span>ScrollMagic</span>
-                        </p>
-                    </div>
-
-                    <div
-                        ref={(el) => (slidesSkill.current[3] = el)}
-                        className="slide-skill"
-                    >
-                        <h2 ref={(el) => (slidesSkillH2.current[3] = el)}>
-                            Dev Tools & Other Skills:
-                        </h2>
-                        <p ref={(el) => (slidesSkillPara.current[3] = el)}>
-                            <span>Git/ Github (Version Control)</span>
-                            <span>Figma/ Adobe XD (Design)</span>
-                        </p>
-                    </div>
+                <div
+                    ref={sliderSkill}
+                    style={{
+                        transform: `translateX(${currentSlide * -315}px)`,
+                    }}
+                    className="slider-skill"
+                >
+                    {SKILLS.map(({ heading, technologies }, index) => (
+                        <div
+                            key={heading}
+                            ref={(el) => (slidesSkill.current[index] = el)}
+                            className="slide-skill"
+                        >
+                            <h2
+                                ref={(el) =>
+                                    (slidesSkillH2.current[index] = el)
+                                }
+                            >
+                                {heading}
+                            </h2>
+                            <p
+                                ref={(el) =>
+                                    (slidesSkillPara.current[index] = el)
+                                }
+                            >
+                                {technologies.map((tech) => (
+                                    <span key={tech}>{tech}</span>
+                                ))}
+                            </p>
+                        </div>
+                    ))}
                 </div>
                 <div ref={blockSkill} className="block-skill"></div>
             </div>

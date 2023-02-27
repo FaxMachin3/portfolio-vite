@@ -33,7 +33,7 @@
         position: relative;
         height: 13rem;
         width: 13rem;
-        border: 2px dashed;
+        border: 2px dashed var(--secondary);
         border-radius: 50%;
 
         .img-about {
@@ -65,6 +65,7 @@
         }
 
         .block-about {
+            background-color: var(--secondary);
             position: absolute;
             top: -5%;
             right: -3%;

@@ -1,8 +1,7 @@
-import React, { useRef, useEffect } from 'react';
-import { gsap, Power2 } from 'gsap';
-import './ProjectStyle.scss';
-
-import { ANCHORS } from '../../common/constants';
+import React, { useRef, useEffect, useState } from 'react';
+import useProjectSlideAnimate from '../../hooks/useProjectSlideAnimate';
+import useThrottle from '../../hooks/useThrottle';
+import { ANCHORS, PROJECTS, SLIDE_DELAY } from '../../common/constants';
 import ProjectSVGCode from './ProjectSVGCode';
 import ProjectSVGWebsite from './ProjectSVGWebsite';
 import Arrow from '../../common/Arrow';
@@ -12,10 +11,12 @@ import MyPortfolio from '../../assests/images/myPortfolio.jpg';
 import BookMyEvent from '../../assests/images/bookMyEvent.jpg';
 import APS from '../../assests/images/APS.jpg';
 
+import './ProjectStyle.scss';
+
 const Project = ({ setSectionRefs }) => {
-    const large = useRef(window.matchMedia('(min-width: 769px)').matches);
-    const slideCountProject = useRef(0);
-    const allowClick = useRef(true);
+    const [currentSlide, setCurrentSlide] = useState(0);
+    const [prevSlide, setPrevSlide] = useState(0);
+    const [arrowClicked, setArrowClicked] = useState(false);
     const imageSliderWidth = useRef(0);
     const textSliderWidth = useRef(0);
     const textSliderHeight = useRef(0);
@@ -36,222 +37,7 @@ const Project = ({ setSectionRefs }) => {
     const imageSlidesProject = useRef(new Array(5));
     const imageProject = useRef(new Array(5));
 
-    const animateTextProject = (heading, para, links, prevCount) => {
-        const timelineText = gsap.timeline({
-            defaults: { opacity: 0, duration: 0.75, ease: Power2.easeInOut },
-        });
-
-        const prevH2 = textSlidesProjectH2.current[prevCount];
-        const prevPara = textSlidesProjectPara.current[prevCount];
-        const prevLink = Array.from(linksProject.current[prevCount].childNodes);
-
-        const xTrans = large.current ? 10 : 5;
-
-        gsap.to(blockProject.current, {
-            duration: 0.15,
-            x: xTrans,
-            ease: Power2.easeOut,
-        });
-        gsap.to(blockProject.current, {
-            duration: 0.15,
-            x: 0,
-            delay: 0.15,
-            ease: Power2.easeOut,
-        });
-
-        large.current
-            ? timelineText
-                  .to(prevH2, { duration: 0.5, y: -100, opacity: 0 })
-                  .to(prevPara, { duration: 0.5, y: -100, opacity: 0 }, '-=0.4')
-                  .to(
-                      prevLink,
-                      {
-                          duration: 0.5,
-                          y: -100,
-                          opacity: 0,
-                          stagger: {
-                              each: 0.1,
-                          },
-                      },
-                      '-=0.3'
-                  )
-                  .from(heading, { duration: 0.75, y: 100 }, '-=0.1')
-                  .from(
-                      para,
-                      {
-                          duration: 0.75,
-                          y: 100,
-                          stagger: {
-                              each: 0.05,
-                          },
-                      },
-                      '-=0.65'
-                  )
-                  .from(
-                      links,
-                      {
-                          duration: 0.75,
-                          y: 100,
-                          stagger: {
-                              each: 0.05,
-                          },
-                      },
-                      '-=0.55'
-                  )
-                  .set(prevH2, { y: 0, opacity: 1 })
-                  .set(prevPara, { y: 0, opacity: 1 })
-                  .set(prevLink, { y: 0, opacity: 1 })
-            : timelineText
-                  .from(heading, { delay: 0.4 })
-                  .from(
-                      para,
-                      {
-                          y: 100,
-                          stagger: {
-                              each: 0.05,
-                          },
-                      },
-                      '-=0.65'
-                  )
-                  .from(
-                      links,
-                      {
-                          y: 100,
-                          stagger: {
-                              each: 0.05,
-                          },
-                      },
-                      '-=0.55'
-                  );
-    };
-
-    const selectTextProject = (count, prevCount) => {
-        if (count === 5) {
-            animateTextProject(
-                textSlidesProjectH2.current[0],
-                textSlidesProjectPara.current[0],
-                Array.from(linksProject.current[0].childNodes),
-                prevCount
-            );
-        } else if (count === -1) {
-            animateTextProject(
-                textSlidesProjectH2.current[4],
-                textSlidesProjectPara.current[4],
-                Array.from(linksProject.current[4].childNodes),
-                prevCount
-            );
-        } else {
-            animateTextProject(
-                textSlidesProjectH2.current[count],
-                textSlidesProjectPara.current[count],
-                Array.from(linksProject.current[count].childNodes),
-                prevCount
-            );
-        }
-    };
-
-    const changeSlideProject = (args) => {
-        const [leftArrow, rightArrow] = args;
-
-        leftArrow.current.addEventListener('click', () => {
-            if (allowClick.current && slideCountProject.current > 0) {
-                allowClick.current = !allowClick.current;
-
-                slideCountProject.current--;
-
-                selectTextProject(
-                    slideCountProject.current,
-                    slideCountProject.current + 1
-                );
-
-                if (slideCountProject.current <= -1) {
-                    slideCountProject.current = 4;
-                }
-
-                imageSliderProject.current.style.transform = `translateX(-${
-                    imageSliderWidth.current * slideCountProject.current
-                }px)`;
-
-                window.matchMedia('(min-width: 769px)').matches
-                    ? (textSliderProject.current.style.transform = `translateY(-${
-                          textSliderHeight.current * slideCountProject.current
-                      }px)`)
-                    : (textSliderProject.current.style.transform = `translateX(-${
-                          textSliderWidth.current * slideCountProject.current
-                      }px)`);
-
-                setTimeout(() => {
-                    allowClick.current = !allowClick.current;
-                }, 1100);
-            }
-        });
-
-        rightArrow.current.addEventListener('click', () => {
-            if (allowClick.current && slideCountProject.current < 4) {
-                allowClick.current = !allowClick.current;
-
-                slideCountProject.current++;
-
-                selectTextProject(
-                    slideCountProject.current,
-                    slideCountProject.current - 1
-                );
-
-                if (slideCountProject.current >= 5) {
-                    slideCountProject.current = 0;
-                }
-
-                imageSliderProject.current.style.transform = `translateX(-${
-                    imageSliderWidth.current * slideCountProject.current
-                }px)`;
-
-                window.matchMedia('(min-width: 769px)').matches
-                    ? (textSliderProject.current.style.transform = `translateY(-${
-                          textSliderHeight.current * slideCountProject.current
-                      }px)`)
-                    : (textSliderProject.current.style.transform = `translateX(-${
-                          textSliderWidth.current * slideCountProject.current
-                      }px)`);
-
-                setTimeout(() => {
-                    allowClick.current = !allowClick.current;
-                }, 1100);
-            }
-        });
-    };
-
-    // lazy loading
     useEffect(() => {
-        const imageProject = window.document.querySelectorAll('.image-project');
-
-        imageProject.forEach((image) => {
-            image.addEventListener('load', () => {
-                const loaderCircles = image.previousElementSibling.childNodes;
-
-                // props.theme
-                //     ? loaderCircles.forEach((circle) => {
-                //           setTimeout(() => {
-                //               circle.style.backgroundColor = '#A13251';
-                //           }, 75);
-                //       })
-                //     : loaderCircles.forEach((circle) => {
-                //           setTimeout(() => {
-                //               circle.style.backgroundColor = '#008F96';
-                //           }, 75);
-                //       });
-
-                image.style.opacity = '1';
-
-                setTimeout(() => {
-                    image.previousElementSibling.style.display = 'none';
-                }, 500);
-            });
-        });
-    }, []);
-
-    useEffect(() => {
-        changeSlideProject([leftArrowProject, rightArrowProject]);
-
         imageSliderWidth.current =
             leftContainerProject.current.getBoundingClientRect().width;
         textSliderWidth.current =
@@ -276,6 +62,57 @@ const Project = ({ setSectionRefs }) => {
         }));
     }, []);
 
+    useProjectSlideAnimate(
+        currentSlide,
+        textSlidesProjectH2,
+        textSlidesProjectPara,
+        linksProject,
+        blockProject,
+        arrowClicked,
+        prevSlide
+    );
+
+    const onArrowClick = (inc) => {
+        return useThrottle((_e) => {
+            setArrowClicked(true);
+            setCurrentSlide((prevCount) => {
+                setPrevSlide(prevCount);
+                let newCount = prevCount + inc;
+
+                if (newCount < 0) newCount = 0;
+                if (newCount >= PROJECTS.length) newCount = PROJECTS.length - 1;
+
+                if (inc === -1) {
+                    imageSliderProject.current.style.transform = `translateX(-${
+                        imageSliderWidth.current * newCount
+                    }px)`;
+
+                    window.matchMedia('(min-width: 769px)').matches
+                        ? (textSliderProject.current.style.transform = `translateY(-${
+                              textSliderHeight.current * newCount
+                          }px)`)
+                        : (textSliderProject.current.style.transform = `translateX(-${
+                              textSliderWidth.current * newCount
+                          }px)`);
+                } else {
+                    imageSliderProject.current.style.transform = `translateX(-${
+                        imageSliderWidth.current * newCount
+                    }px)`;
+
+                    window.matchMedia('(min-width: 769px)').matches
+                        ? (textSliderProject.current.style.transform = `translateY(-${
+                              textSliderHeight.current * newCount
+                          }px)`)
+                        : (textSliderProject.current.style.transform = `translateX(-${
+                              textSliderWidth.current * newCount
+                          }px)`);
+                }
+
+                return newCount;
+            });
+        }, SLIDE_DELAY);
+    };
+
     return (
         <div className="container-project container" data-section="project">
             <div className="heading-project">
@@ -287,6 +124,7 @@ const Project = ({ setSectionRefs }) => {
             <div ref={leftContainerProject} className="left-container-project">
                 <div
                     ref={leftArrowProject}
+                    onClick={onArrowClick(-1)}
                     className="left-arrow-container-project"
                 >
                     <Arrow className="left-arrow-project" />
@@ -294,6 +132,7 @@ const Project = ({ setSectionRefs }) => {
 
                 <div
                     ref={rightArrowProject}
+                    onClick={onArrowClick(1)}
                     className="right-arrow-container-project"
                 >
                     <Arrow className="right-arrow-project" />

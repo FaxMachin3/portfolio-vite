@@ -97,7 +97,7 @@ const Contact = ({ setSectionRefs }) => {
                     >
                         <div>
                             <a
-                                href="https://www.instagram.com/_subhamraj/"
+                                href="https://www.instagram.com/subhamraj.dev/"
                                 target="__blank"
                             >
                                 <ContactSVGInstagram />
@@ -105,7 +105,7 @@ const Contact = ({ setSectionRefs }) => {
                         </div>
                         <div>
                             <a
-                                href="https://www.instagram.com/_subhamraj/"
+                                href="https://www.instagram.com/subhamraj.dev/"
                                 target="__blank"
                             >
                                 <p>Instagram</p>

@@ -12,6 +12,7 @@ import Indicators from '../indicators/Indicators';
 import Navbar from '../navbar/Navbar';
 import useAnimate from '../../hooks/useAnimate';
 import useTheme from '../../hooks/useTheme';
+import useArrowNavigation from '../../hooks/useArrowNavigation';
 
 import './App.scss';
 
@@ -21,6 +22,7 @@ const App = () => {
     const [sectionRefs, setSectionRefs] = useState(DEFAULT_SECTION_REFS);
 
     useTheme(theme);
+    useArrowNavigation(setDestination);
     useAnimate(destination, sectionRefs);
 
     return (
@@ -43,7 +45,6 @@ const App = () => {
                     setDestination(destination.anchor)
                 }
                 dragAndMove
-                navigation
                 render={(rfpProps) => (
                     <ReactFullpage.Wrapper>
                         {SECTIONS.map(({ Component, anchor }) => (

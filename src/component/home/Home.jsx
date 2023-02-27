@@ -7,7 +7,7 @@ import { ANCHORS } from '../../common/constants';
 import Arrow from '../../common/Arrow';
 import HomeSVG from './HomeSVG';
 
-const Home = ({ setSectionRefs }) => {
+const Home = ({ setSectionRefs, fullpageApi }) => {
     const arrow = useRef(null);
     const workButton = useRef(null);
     const textHome = useRef(new Array(3));
@@ -22,11 +22,11 @@ const Home = ({ setSectionRefs }) => {
     }, []);
 
     const onArrowClick = () => {
-        window.document.querySelector('li .about').click();
+        fullpageApi?.moveSectionDown();
     };
 
     const onWorkButtonClick = () => {
-        window.document.querySelector('li .project').click();
+        fullpageApi?.moveTo(ANCHORS[3]);
     };
 
     return (

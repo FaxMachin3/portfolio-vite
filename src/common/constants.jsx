@@ -68,7 +68,51 @@ export const DEFAULT_SECTION_REFS = {
 
 export const THEME_STYLE = {
     [THEME.DARK]:
-        '--background: #121212;--primary: #DADADA;--secondary: #A13251',
+        '--background: #121212; background-color: #121212; --primary: #DADADA;--secondary: #A13251',
     [THEME.LIGHT]:
-        '--background: #E1E1E1;--primary: #333333;--secondary: #008F96',
+        '--background: #E1E1E1; background-color: #E1E1E1; --primary: #333333;--secondary: #008F96',
 };
+
+export const SKILLS = [
+    {
+        heading: 'Programming Languages',
+        technologies: ['Javascript/ Typescript', 'C#', 'Python'],
+    },
+    {
+        heading: 'Backend',
+        technologies: ['Node.js', 'Express.js', 'MongoDB', 'MySQL', '.Net'],
+    },
+    {
+        heading: 'Frontend',
+        technologies: ['React', 'Preact', 'Next.js', 'React Query', 'Zustand'],
+    },
+    {
+        heading: 'Dev Tools & Other Skills',
+        technologies: [
+            'Git/ Github (Version Control)',
+            'Figma/ Adobe XD (Design)',
+        ],
+    },
+];
+
+export const PROJECTS = [
+    {
+        heading: 'Programming Languages',
+        technologies: ['Javascript/ Typescript', 'C#', 'Python'],
+    },
+    {
+        heading: 'Backend',
+        technologies: ['Node.js', 'Express.js', 'MongoDB', 'MySQL', '.Net'],
+    },
+    {
+        heading: 'Frontend',
+        technologies: ['React', 'Preact', 'Next.js', 'React Query', 'Zustand'],
+    },
+    {
+        heading: 'Dev Tools & Other Skills',
+        technologies: [
+            'Git/ Github (Version Control)',
+            'Figma/ Adobe XD (Design)',
+        ],
+    },
+];

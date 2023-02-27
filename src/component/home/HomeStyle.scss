@@ -26,6 +26,11 @@
             .profession-home {
                 font-weight: 500;
             }
+
+            .name-home {
+                color: var(--secondary);
+            }
+
             p:nth-child(3) {
                 font-size: 1.5rem;
             }
@@ -36,7 +41,7 @@
             height: 4rem;
             justify-content: space-evenly;
             align-items: center;
-            padding-bottom: 1.5rem;
+            padding: 3.5rem 0;
 
             a {
                 display: flex;
@@ -47,15 +52,14 @@
                 cursor: pointer;
                 color: inherit;
                 border: none;
-                height: 2rem;
-                width: 6rem;
+                padding: 1.2rem 3.5rem;
                 border-radius: 15px;
                 position: relative;
                 font-size: 0.6rem;
 
                 span {
                     position: absolute;
-                    font-size: 70%;
+                    font-size: 0.8rem;
                     top: 50%;
                     left: 50%;
                     transform: translate(-50%, -50%);
@@ -63,11 +67,12 @@
             }
 
             .resume-button {
+                background-color: var(--secondary);
                 color: #dadada;
             }
 
             .work-button {
-                // background-color: transparent;
+                background-color: transparent;
                 border: 1.5px solid;
             }
         }
@@ -127,12 +132,17 @@
 
         .button-home {
             justify-content: flex-start !important;
-            padding-bottom: 0.5vw !important;
+            padding: 0.5vw 0 !important;
 
             .resume-button,
             .work-button {
+                padding: 1.5vw 4.5vw !important;
                 border-radius: 100px !important;
                 font-family: inherit;
+
+                span {
+                    font-size: 1.1vw !important;
+                }
 
                 &:hover {
                     opacity: 0.9;
@@ -153,7 +163,7 @@
             height: 4.2vw;
             width: 4.2vw;
             position: absolute;
-            top: 100%;
+            top: 95%;
             left: 50%;
             transform: translate(-50%, -100%);
 

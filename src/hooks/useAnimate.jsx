@@ -4,8 +4,6 @@ import { SECTION_ANIMATE, SLIDE_DELAY } from '../common/constants';
 
 const useAnimate = (destination, sectionRefs) => {
     useEffect(() => {
-        console.log({ destination, sectionRefs });
-
         const gsapContext = gsap.context(() => {
             SECTION_ANIMATE[destination]?.(sectionRefs?.[destination]);
         });

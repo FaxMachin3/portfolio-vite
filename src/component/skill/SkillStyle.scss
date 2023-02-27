@@ -14,9 +14,9 @@
         position: relative;
         font-size: 2rem;
 
-        h1{
+        h1 {
             font-weight: 500;
-            letter-spacing: .03rem;
+            letter-spacing: 0.03rem;
         }
 
         .line-skill {
@@ -64,7 +64,7 @@
             top: 0;
             left: -1rem;
 
-            &:hover .left-arrow-skill{
+            &:hover .left-arrow-skill {
                 opacity: 0.8;
             }
 
@@ -78,7 +78,7 @@
             top: 0;
             right: -1rem;
 
-            &:hover .right-arrow-skill{
+            &:hover .right-arrow-skill {
                 opacity: 0.8;
             }
 
@@ -111,7 +111,7 @@
                     height: 20%;
                     font-size: 1.3rem;
                     word-spacing: 0.25rem;
-                    letter-spacing: .05rem;
+                    letter-spacing: 0.05rem;
                 }
 
                 p {
@@ -124,13 +124,14 @@
                     span {
                         font-size: 1rem;
                         word-spacing: 0.25rem;
-                        letter-spacing: .05rem;
+                        letter-spacing: 0.05rem;
                     }
                 }
             }
         }
 
-        .block-skill{
+        .block-skill {
+            background-color: var(--secondary);
             z-index: -5;
             position: absolute;
             top: 0;
@@ -196,8 +197,8 @@
                         justify-content: flex-start;
                         margin: 0 5vw;
                         width: 100%;
-                        
-                        span{
+
+                        span {
                             display: inline-block;
                             font-size: 1vw;
                             margin-right: 8%;
@@ -206,7 +207,7 @@
                 }
             }
 
-            .block-skill{
+            .block-skill {
                 height: 100%;
                 width: 15%;
                 top: 2%;

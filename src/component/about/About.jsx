@@ -44,12 +44,15 @@ const About = ({ setSectionRefs }) => {
 
             <div ref={rightContainerAbout} className="right-container-about">
                 <p ref={(el) => (textAbout.current[0] = el)}>
-                    I'm twenty two, a systems engineer with good problem solving
-                    skills, currently working with Infosys on React JS.
+                    I'm a Senior Frontend Engineer, passionate about systems and
+                    problem-solving. Like talking to people :) Part-time, I also
+                    post tech-related stuff on YouTube/ Instagram. Madly in love
+                    with competitive games &lt;3.
                 </p>
 
                 <p ref={(el) => (textAbout.current[1] = el)}>
-                    To know more about my project and skills please scroll down.
+                    Currently Exploring - Tanstack/ tRPC/ Zod/ XState/ QWIK/
+                    Astro/ WASM.
                 </p>
 
                 <div ref={blockAbout} className="block-about"></div>

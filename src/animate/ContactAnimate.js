@@ -17,7 +17,6 @@ const contactAnimate = (args) => {
             duration: 1,
             autoAlpha: 0,
             ease: Power2.easeInOut,
-            pointerEvents: 'none',
         },
     });
 
