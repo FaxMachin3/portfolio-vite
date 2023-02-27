@@ -37,6 +37,7 @@
         border-radius: 50%;
 
         .img-about {
+            object-fit: cover;
             position: absolute;
             height: 100%;
             width: 100%;
@@ -52,14 +53,12 @@
         width: 315px;
 
         & p:nth-child(1) {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             padding-bottom: 3vh;
-            word-spacing: 0.25rem;
-            letter-spacing: 0.1rem;
         }
 
         & p:nth-child(2) {
-            font-size: 1rem;
+            font-size: 0.7rem;
             word-spacing: 0.25rem;
             letter-spacing: 0.025rem;
         }

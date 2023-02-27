@@ -8,7 +8,7 @@
             content="UkAb6O45afA_5GNf5w4t3gJSGHKRVvx3Ybh6u11nyPg"
         />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="theme-color" content="#121212" />
+        <meta name="theme-color" content="#E1E1E1" />
         <meta
             name="keywords"
             content="HTML,CSS,Typescript,JavaScript,React,Preact,Next.js,React Query,Zustand,Redux,Node,Express,MonogoDB,C#,Python,Developer,Problem Solving,Portfolio,Job,PWA,System Design,Full Stack"
@@ -18,10 +18,21 @@
             content="Portfolio of a passionate developer"
         />
         <meta name="author" content="Subham Raj" />
+        <link rel="stylesheet" href="/styles.css" />
         <title>Subham Raj</title>
     </head>
     <body>
+        <div class="loader-container">
+            <div class="loader">
+                <div class="circle-loader circle1"></div>
+                <div class="circle-loader circle2"></div>
+                <div class="circle-loader circle3"></div>
+            </div>
+        </div>
+
         <div id="root"></div>
+
         <script type="module" src="/src/main.jsx"></script>
+        <script type="module" src="/loader.js"></script>
     </body>
 </html>

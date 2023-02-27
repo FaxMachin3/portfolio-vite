@@ -2,6 +2,8 @@
 
 This is my portfolio website. My sole reason to build this was to improve my front-end skills.
 
+I made this to improve and practice my front-end skills in 2020. This was made using React.js (Hooks). In 2023; refactored code, fixed some bugs and used Vite instead of Webpack.
+
 ### Technologies Used:
 
 -   Front-end:

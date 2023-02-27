@@ -11,6 +11,7 @@ import contactAnimate from '../animate/ContactAnimate';
 
 import DarkWeather from '../assests/images/darkWeather.jpg';
 import Socialize from '../assests/images/socialize.jpg';
+import GetYourDreamJob from '../assests/images/getYourDreamJob.png';
 import MyPortfolio from '../assests/images/myPortfolio.jpg';
 import BookMyEvent from '../assests/images/bookMyEvent.jpg';
 import APS from '../assests/images/APS.jpg';
@@ -120,14 +121,14 @@ export const PROJECTS = [
         },
     },
     {
-        imageDetails: { src: APS, alt: 'arizona public service' },
+        imageDetails: { src: GetYourDreamJob, alt: 'get your dream job' },
         projectDetails: {
-            heading: 'Arizona Public Service',
+            heading: 'Get Your Dream Job',
             description:
-                "Cross-platform mobile app built using Xamarin native. I worked on Xamarin iOS front-end and integration; and integration of Microsoft's App Center.",
+                'MERN stack application for job seekers. Also used React Query and Zustand.',
             links: {
-                website:
-                    'https://play.google.com/store/apps/details?id=com.aps.apsconsumerapp',
+                code: 'https://github.com/FaxMachin3/get-your-dream-job-vite-full',
+                website: 'https://getyourdreamjob.onrender.com/',
             },
         },
     },
@@ -136,10 +137,22 @@ export const PROJECTS = [
         projectDetails: {
             heading: 'My Portfolio',
             description:
-                'I made this to improve and practice my front-end skills. This was made using React.js (Hooks).',
+                'I made this to improve and practice my front-end skills in 2020. This was made using React.js (Hooks). In 2023; refactored code, fixed some bugs and used Vite instead of Webpack.',
             links: {
-                code: 'https://github.com/FaxMachin3/portfolio',
+                code: 'https://github.com/FaxMachin3/portfolio-vite',
                 website: 'https://subhamraj.dev/',
+            },
+        },
+    },
+    {
+        imageDetails: { src: APS, alt: 'arizona public service' },
+        projectDetails: {
+            heading: 'Arizona Public Service',
+            description:
+                "Cross-platform mobile app built using Xamarin native. I worked on Xamarin iOS front-end and integration; and integration of Microsoft's App Center.",
+            links: {
+                website:
+                    'https://play.google.com/store/apps/details?id=com.aps.apsconsumerapp',
             },
         },
     },

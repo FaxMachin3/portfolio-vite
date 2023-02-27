@@ -5,14 +5,18 @@ import './ToggleButton.scss';
 const ToggleButton = ({ setHamOpen, theme, setTheme }) => {
     const onToggleClick = () => {
         setHamOpen(false);
-        setTheme((prevTheme) =>
-            prevTheme === THEME.DARK ? THEME.LIGHT : THEME.DARK
-        );
+        setTheme((prevTheme) => {
+            const newTheme =
+                prevTheme === THEME.DARK ? THEME.LIGHT : THEME.DARK;
+            localStorage.setItem('current-theme', newTheme);
+
+            return newTheme;
+        });
     };
 
     return (
         <div className="outer" onClick={onToggleClick}>
-            <div className={`inner ${theme === THEME.LIGHT ? 'circle' : ''}`} />
+            <div className={`inner ${theme === THEME.DARK ? 'circle' : ''}`} />
         </div>
     );
 };

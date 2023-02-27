@@ -13,17 +13,21 @@ import Navbar from '../navbar/Navbar';
 import useAnimate from '../../hooks/useAnimate';
 import useTheme from '../../hooks/useTheme';
 import useArrowNavigation from '../../hooks/useArrowNavigation';
+import useLoader from '../../hooks/useLoader';
 
 import './App.scss';
 
 const App = () => {
-    const [theme, setTheme] = useState(THEME.DARK);
+    const [theme, setTheme] = useState(
+        localStorage.getItem('current-theme') ?? THEME.LIGHT
+    );
     const [destination, setDestination] = useState(ANCHORS[0]);
     const [sectionRefs, setSectionRefs] = useState(DEFAULT_SECTION_REFS);
 
     useTheme(theme);
     useArrowNavigation(setDestination);
     useAnimate(destination, sectionRefs);
+    useLoader();
 
     return (
         <Error>

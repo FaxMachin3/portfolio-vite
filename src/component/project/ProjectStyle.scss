@@ -1,4 +1,6 @@
 // mobile first
+$total-projects: 6;
+
 .container-project {
     z-index: 5;
     position: relative;
@@ -59,7 +61,7 @@
 
         .left-arrow-container-project {
             top: 0;
-            left: -1.5rem;
+            left: -1.4rem;
 
             &:hover .left-arrow-project {
                 opacity: 0.8;
@@ -73,7 +75,7 @@
 
         .right-arrow-container-project {
             top: 0;
-            right: -1.5rem;
+            right: -1.4rem;
 
             &:hover .right-arrow-project {
                 opacity: 0.8;
@@ -87,7 +89,7 @@
 
         .image-slider-project {
             height: 100%;
-            width: 315 * 5px;
+            width: calc(315px * $total-projects);
             display: flex;
             transition: transform 500ms ease-out;
 
@@ -137,7 +139,7 @@
 
         .text-slider-project {
             height: 100%;
-            width: 315 * 5px;
+            width: calc(315px * $total-projects);
             display: flex;
             transition: transform 500ms ease-out;
 
@@ -218,7 +220,7 @@
             }
 
             .image-slider-project {
-                width: 100 * 5%;
+                width: calc(100% * $total-projects);
 
                 .image-container-project {
                     width: 100%;
@@ -241,7 +243,7 @@
             width: 50%;
 
             .text-slider-project {
-                height: calc(100 * 5%);
+                height: calc(100% * $total-projects);
                 width: 100%;
                 flex-direction: column;
                 transition-duration: 0s;
