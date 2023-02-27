@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { INDICATORS } from '../../common/constants';
 import { SLIDE_DELAY } from '../../common/constants';
 import useThrottle from '../../hooks/useThrottle';

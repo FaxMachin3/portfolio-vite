@@ -44,11 +44,11 @@
         .bar {
             width: 1%;
             height: 4rem;
-            transform: scaleY(0.5);
+            transform: scaleY(0.2);
             transform-origin: bottom;
 
             &.active {
-                transform: scaleY(1);
+                transform: scaleY(0.5);
             }
         }
     }
