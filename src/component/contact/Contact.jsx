@@ -1,12 +1,8 @@
 import React, { useRef, useEffect } from 'react';
 import './ContactStyle.scss';
 
-import { ANCHORS } from '../../common/constants';
+import { ANCHORS, CONTACTS } from '../../common/constants';
 import ContactSVG from './ContactSVG';
-import ContactSVGInstagram from './ContactSVGInstagram';
-import ContactSVGLinkedin from './ContactSVGLinkedin';
-import ContactSVGFacebook from './ContactSVGFacebook';
-import ContactSVGGithub from './ContactSVGGithub';
 
 const Contact = ({ setSectionRefs }) => {
     const headingContact = useRef(null);
@@ -67,99 +63,51 @@ const Contact = ({ setSectionRefs }) => {
                 className="bottom-container-contact"
             >
                 <div className="top-half-bottom-container-contact">
-                    <div
-                        ref={(el) => {
-                            linksContact.current[0] = el;
-                        }}
-                    >
-                        <div>
-                            <a
-                                href="https://github.com/FaxMachin3"
-                                target="__blank"
+                    {CONTACTS.slice(0, 2).map(
+                        ({ name, Icon, website }, index) => (
+                            <div
+                                key={name}
+                                ref={(el) => {
+                                    linksContact.current[index] = el;
+                                }}
                             >
-                                <ContactSVGGithub />
-                            </a>
-                        </div>
-                        <div>
-                            <a
-                                href="https://github.com/FaxMachin3"
-                                target="__blank"
-                            >
-                                <p>GitHub</p>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div
-                        ref={(el) => {
-                            linksContact.current[1] = el;
-                        }}
-                    >
-                        <div>
-                            <a
-                                href="https://www.instagram.com/subhamraj.dev/"
-                                target="__blank"
-                            >
-                                <ContactSVGInstagram />
-                            </a>
-                        </div>
-                        <div>
-                            <a
-                                href="https://www.instagram.com/subhamraj.dev/"
-                                target="__blank"
-                            >
-                                <p>Instagram</p>
-                            </a>
-                        </div>
-                    </div>
+                                <div>
+                                    <a href={website} target="__blank">
+                                        <Icon />
+                                    </a>
+                                </div>
+                                <div>
+                                    <a href={website} target="__blank">
+                                        <p>{name}</p>
+                                    </a>
+                                </div>
+                            </div>
+                        )
+                    )}
                 </div>
 
                 <div className="bottom-half-bottom-container-contact">
-                    <div
-                        ref={(el) => {
-                            linksContact.current[2] = el;
-                        }}
-                    >
-                        <div>
-                            <a
-                                href="https://www.linkedin.com/in/subhamraj"
-                                target="__blank"
+                    {CONTACTS.slice(2, 4).map(
+                        ({ name, Icon, website }, index) => (
+                            <div
+                                key={name}
+                                ref={(el) => {
+                                    linksContact.current[index + 2] = el;
+                                }}
                             >
-                                <ContactSVGLinkedin />
-                            </a>
-                        </div>
-                        <div>
-                            <a
-                                href="https://www.linkedin.com/in/subhamraj"
-                                target="__blank"
-                            >
-                                <p>LinkedIn</p>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div
-                        ref={(el) => {
-                            linksContact.current[3] = el;
-                        }}
-                    >
-                        <div>
-                            <a
-                                href="https://www.facebook.com/F4xMachin3"
-                                target="__blank"
-                            >
-                                <ContactSVGFacebook />
-                            </a>
-                        </div>
-                        <div>
-                            <a
-                                href="https://www.facebook.com/F4xMachin3"
-                                target="__blank"
-                            >
-                                <p>Facebook</p>
-                            </a>
-                        </div>
-                    </div>
+                                <div>
+                                    <a href={website} target="__blank">
+                                        <Icon />
+                                    </a>
+                                </div>
+                                <div>
+                                    <a href={website} target="__blank">
+                                        <p>{name}</p>
+                                    </a>
+                                </div>
+                            </div>
+                        )
+                    )}
                 </div>
             </div>
         </div>

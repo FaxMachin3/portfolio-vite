@@ -104,10 +104,11 @@
                     transform: translate(-50%, -50%);
                     height: 100%;
                     width: 100%;
-                    // background-color: teal;
                 }
 
                 img {
+                    max-width: 85%;
+                    object-fit: contain;
                     display: block !important;
                 }
 
@@ -143,7 +144,7 @@
             .text-slide-project {
                 height: 100%;
                 width: 315px;
-                padding: 2rem;
+                padding: 1.5rem;
                 display: flex;
                 flex-direction: column;
                 justify-content: space-between;

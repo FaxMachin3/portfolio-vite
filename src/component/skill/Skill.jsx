@@ -94,7 +94,9 @@ const Skill = ({ setSectionRefs }) => {
                 <div
                     ref={sliderSkill}
                     style={{
-                        transform: `translateX(${currentSlide * -315}px)`,
+                        transform: `translateX(${
+                            currentSlide * (-100 / SKILLS.length)
+                        }%)`,
                     }}
                     className="slider-skill"
                 >

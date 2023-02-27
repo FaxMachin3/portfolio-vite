@@ -9,6 +9,17 @@ import skillAnimate from '../animate/SkillAnimate';
 import projectAnimate from '../animate/ProjectAnimate';
 import contactAnimate from '../animate/ContactAnimate';
 
+import DarkWeather from '../assests/images/darkWeather.jpg';
+import Socialize from '../assests/images/socialize.jpg';
+import MyPortfolio from '../assests/images/myPortfolio.jpg';
+import BookMyEvent from '../assests/images/bookMyEvent.jpg';
+import APS from '../assests/images/APS.jpg';
+
+import ContactSVGInstagram from '../component/contact/ContactSVGInstagram';
+import ContactSVGLinkedin from '../component/contact/ContactSVGLinkedin';
+import ContactSVGFacebook from '../component/contact/ContactSVGFacebook';
+import ContactSVGGithub from '../component/contact/ContactSVGGithub';
+
 export const SLIDE_DELAY = 1000;
 
 export const THEME = {
@@ -97,22 +108,84 @@ export const SKILLS = [
 
 export const PROJECTS = [
     {
-        heading: 'Programming Languages',
-        technologies: ['Javascript/ Typescript', 'C#', 'Python'],
+        imageDetails: { src: Socialize, alt: 'socialize' },
+        projectDetails: {
+            heading: 'Socialize',
+            description:
+                'Responsive, full stack, social-networking web app built using MERN stack with love.',
+            links: {
+                code: 'https://github.com/FaxMachin3/socialize',
+                website: 'http://mighty-meadow-58912.herokuapp.com',
+            },
+        },
     },
     {
-        heading: 'Backend',
-        technologies: ['Node.js', 'Express.js', 'MongoDB', 'MySQL', '.Net'],
+        imageDetails: { src: APS, alt: 'arizona public service' },
+        projectDetails: {
+            heading: 'Arizona Public Service',
+            description:
+                "Cross-platform mobile app built using Xamarin native. I worked on Xamarin iOS front-end and integration; and integration of Microsoft's App Center.",
+            links: {
+                website:
+                    'https://play.google.com/store/apps/details?id=com.aps.apsconsumerapp',
+            },
+        },
     },
     {
-        heading: 'Frontend',
-        technologies: ['React', 'Preact', 'Next.js', 'React Query', 'Zustand'],
+        imageDetails: { src: MyPortfolio, alt: 'portfolio' },
+        projectDetails: {
+            heading: 'My Portfolio',
+            description:
+                'I made this to improve and practice my front-end skills. This was made using React.js (Hooks).',
+            links: {
+                code: 'https://github.com/FaxMachin3/portfolio',
+                website: 'https://subhamraj.dev/',
+            },
+        },
     },
     {
-        heading: 'Dev Tools & Other Skills',
-        technologies: [
-            'Git/ Github (Version Control)',
-            'Figma/ Adobe XD (Design)',
-        ],
+        imageDetails: { src: DarkWeather, alt: 'dark weather' },
+        projectDetails: {
+            heading: 'Dark Weather',
+            description:
+                "A small dark themed weather app built using Python's tkinter Library. Just enter a city or a country name to get the weather report.",
+            links: {
+                code: 'https://github.com/FaxMachin3/weather',
+            },
+        },
+    },
+    {
+        imageDetails: { src: BookMyEvent, alt: 'book my event' },
+        projectDetails: {
+            heading: 'Book My Event',
+            description:
+                'This is pure, non-responsive-spaghetti code as this was the first college project I just made to have a taste of web development.',
+            links: {
+                code: 'https://github.com/FaxMachin3/BookMyEvent',
+            },
+        },
+    },
+];
+
+export const CONTACTS = [
+    {
+        name: 'GitHub',
+        Icon: ContactSVGGithub,
+        website: 'https://github.com/FaxMachin3',
+    },
+    {
+        name: 'Instagram',
+        Icon: ContactSVGInstagram,
+        website: 'https://www.instagram.com/subhamraj.dev',
+    },
+    {
+        name: 'LinkedIn',
+        Icon: ContactSVGLinkedin,
+        website: 'https://www.linkedin.com/in/subhamraj',
+    },
+    {
+        name: 'Facebook',
+        Icon: ContactSVGFacebook,
+        website: 'https://www.facebook.com/F4xMachin3',
     },
 ];
