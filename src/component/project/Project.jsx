@@ -118,7 +118,7 @@ const Project = ({ setSectionRefs }) => {
                             <img
                                 ref={(el) => (imageProject.current[index] = el)}
                                 className="image-project"
-                                loading="lazy"
+                                loading="eager"
                                 {...imageDetails}
                             />
                         </div>

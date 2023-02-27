@@ -38,7 +38,7 @@ const About = ({ setSectionRefs }) => {
                     className="img-about"
                     src={avatar}
                     alt="avatar"
-                    loading="lazy"
+                    loading="eager"
                 ></img>
             </div>
 

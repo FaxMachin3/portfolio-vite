@@ -48,6 +48,7 @@ const App = () => {
                 onLeave={(_origin, destination, _direction) =>
                     setDestination(destination.anchor)
                 }
+                easingcss3="cubic-bezier(0.785, 0.135, 0.150, 0.860)"
                 dragAndMove
                 render={(rfpProps) => (
                     <ReactFullpage.Wrapper>
