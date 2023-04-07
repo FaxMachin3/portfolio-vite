@@ -14,6 +14,7 @@ const contactAnimate = (args) => {
 
     const timelineContact = gsap.timeline({
         defaults: {
+            paused: true,
             duration: 1,
             autoAlpha: 0,
             ease: Power2.easeInOut,
@@ -59,6 +60,8 @@ const contactAnimate = (args) => {
                   '-=1.3'
               )
               .from(bottomContainerContact.current, { y: 100 }, '-=1');
+
+    return timelineContact;
 };
 
 export default contactAnimate;

@@ -16,6 +16,7 @@ const aboutAnimate = (args) => {
 
     const timelineAbout = gsap.timeline({
         defaults: {
+            paused: true,
             duration: 1,
             opacity: 0,
             ease: Power2.easeInOut,
@@ -42,6 +43,8 @@ const aboutAnimate = (args) => {
                   '-=1'
               )
               .from(blockAbout.current, { x: -xTrans, scaleX: 0 }, '-=0.7');
+
+    return timelineAbout;
 };
 
 export default aboutAnimate;

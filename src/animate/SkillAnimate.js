@@ -20,6 +20,7 @@ const skillAnimate = (args) => {
 
     const timelineSkill = gsap.timeline({
         defaults: {
+            paused: true,
             duration: 1,
             autoAlpha: 0,
             ease: Power2.easeInOut,
@@ -61,6 +62,8 @@ const skillAnimate = (args) => {
                   {},
                   '-=1'
               );
+
+    return timelineSkill;
 };
 
 export default skillAnimate;

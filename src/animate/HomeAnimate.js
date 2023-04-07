@@ -7,6 +7,10 @@ const homeAnimate = (args) => {
 
     const timelineHome = gsap.timeline({
         defaults: {
+            onStart: (...args) => {
+                console.log('home started', args);
+            },
+            paused: true,
             duration: 1,
             opacity: 0,
             ease: Power2.easeInOut,
@@ -32,6 +36,8 @@ const homeAnimate = (args) => {
         repeat: -1,
         ease: 'slow(0.5, 0.4, false)',
     });
+
+    return timelineHome;
 };
 
 export default homeAnimate;

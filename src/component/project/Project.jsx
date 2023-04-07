@@ -1,7 +1,12 @@
 import React, { useRef, useEffect, useState } from 'react';
 import useProjectSlideAnimate from '../../hooks/useProjectSlideAnimate';
 import useThrottle from '../../hooks/useThrottle';
-import { ANCHORS, PROJECTS, SLIDE_DELAY } from '../../common/constants';
+import {
+    ANCHORS,
+    PROJECTS,
+    SECTION_ANIMATE,
+    SLIDE_DELAY,
+} from '../../common/constants';
 import ProjectSVGCode from './ProjectSVGCode';
 import ProjectSVGWebsite from './ProjectSVGWebsite';
 import Arrow from '../../common/Arrow';
@@ -32,7 +37,7 @@ const Project = ({ setSectionRefs }) => {
     useEffect(() => {
         setSectionRefs((prevSectionRefs) => ({
             ...prevSectionRefs,
-            [ANCHORS[3]]: [
+            [ANCHORS[3]]: SECTION_ANIMATE[ANCHORS[3]]([
                 textSlidesProjectH2,
                 textSlidesProjectPara,
                 blockProject,
@@ -43,7 +48,7 @@ const Project = ({ setSectionRefs }) => {
                 rightArrowProject,
                 linksProject,
                 rightContainerProject,
-            ],
+            ]),
         }));
     }, []);
 

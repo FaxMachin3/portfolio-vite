@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import './ContactStyle.scss';
 
-import { ANCHORS, CONTACTS } from '../../common/constants';
+import { ANCHORS, CONTACTS, SECTION_ANIMATE } from '../../common/constants';
 import ContactSVG from './ContactSVG';
 
 const Contact = ({ setSectionRefs }) => {
@@ -15,14 +15,14 @@ const Contact = ({ setSectionRefs }) => {
     useEffect(() => {
         setSectionRefs((prevSectionRefs) => ({
             ...prevSectionRefs,
-            [ANCHORS[4]]: [
+            [ANCHORS[4]]: SECTION_ANIMATE[ANCHORS[4]]([
                 headingContact,
                 lineContact,
                 bottomContainerContact,
                 leftContainerContact,
                 linksContact,
                 textContact,
-            ],
+            ]),
         }));
     }, []);
 

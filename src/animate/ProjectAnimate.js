@@ -21,6 +21,7 @@ const projectAnimate = (args) => {
 
     const timelineProject = gsap.timeline({
         defaults: {
+            paused: true,
             duration: 1,
             autoAlpha: 0,
             ease: Power2.easeInOut,
@@ -69,6 +70,8 @@ const projectAnimate = (args) => {
                   {},
                   '-=1'
               );
+
+    return timelineProject;
 };
 
 export default projectAnimate;

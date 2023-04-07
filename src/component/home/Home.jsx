@@ -3,7 +3,7 @@ import './HomeStyle.scss';
 
 import Resume from '../../assests/downlodables/Subham_Raj_Feb_2023.pdf';
 
-import { ANCHORS } from '../../common/constants';
+import { ANCHORS, SECTION_ANIMATE } from '../../common/constants';
 import Arrow from '../../common/Arrow';
 import HomeSVG from './HomeSVG';
 
@@ -15,9 +15,15 @@ const Home = ({ setSectionRefs, fullpageApi }) => {
     const rightContainerHome = useRef(null);
 
     useEffect(() => {
+        console.log({ textHome });
         setSectionRefs((prevSectionRefs) => ({
             ...prevSectionRefs,
-            [ANCHORS[0]]: [arrow, buttonHome, rightContainerHome, textHome],
+            [ANCHORS[0]]: SECTION_ANIMATE[ANCHORS[0]]([
+                arrow,
+                buttonHome,
+                rightContainerHome,
+                textHome,
+            ]),
         }));
     }, []);
 

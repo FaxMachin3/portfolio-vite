@@ -3,11 +3,11 @@ import About from '../component/about/About';
 import Skill from '../component/skill/Skill';
 import Project from '../component/project/Project';
 import Contact from '../component/contact/Contact';
-import homeAnimate from '../animate/HomeAnimate';
-import aboutAnimate from '../animate/AboutAnimate';
-import skillAnimate from '../animate/SkillAnimate';
-import projectAnimate from '../animate/ProjectAnimate';
-import contactAnimate from '../animate/ContactAnimate';
+import homeAnimate from '../animate/homeAnimate';
+import aboutAnimate from '../animate/aboutAnimate';
+import skillAnimate from '../animate/skillAnimate';
+import projectAnimate from '../animate/projectAnimate';
+import contactAnimate from '../animate/contactAnimate';
 
 import DarkWeather from '../assests/images/darkWeather.jpg';
 import Socialize from '../assests/images/socialize.jpg';
@@ -71,11 +71,11 @@ export const LINK = [
 ];
 
 export const DEFAULT_SECTION_REFS = {
-    home: [],
-    about: [],
-    skill: [],
-    project: [],
-    contact: [],
+    home: null,
+    about: null,
+    skill: null,
+    project: null,
+    contact: null,
 };
 
 export const THEME_STYLE = {

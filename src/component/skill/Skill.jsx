@@ -1,6 +1,11 @@
 import React, { useRef, useEffect, useState } from 'react';
 import useThrottle from '../../hooks/useThrottle';
-import { ANCHORS, SKILLS, SLIDE_DELAY } from '../../common/constants';
+import {
+    ANCHORS,
+    SECTION_ANIMATE,
+    SKILLS,
+    SLIDE_DELAY,
+} from '../../common/constants';
 import SkillSVG from './SkillSVG';
 import Arrow from '../../common/Arrow';
 import useSkillSlideAnimate from '../../hooks/useSkillSlideAnimate';
@@ -26,7 +31,7 @@ const Skill = ({ setSectionRefs }) => {
     useEffect(() => {
         setSectionRefs((prevSectionRefs) => ({
             ...prevSectionRefs,
-            [ANCHORS[2]]: [
+            [ANCHORS[2]]: SECTION_ANIMATE[ANCHORS[2]]([
                 slidesSkillH2,
                 slidesSkillPara,
                 blockSkill,
@@ -36,7 +41,7 @@ const Skill = ({ setSectionRefs }) => {
                 leftArrowSkill,
                 rightArrowSkill,
                 rightContainerSkill,
-            ],
+            ]),
         }));
     }, []);
 

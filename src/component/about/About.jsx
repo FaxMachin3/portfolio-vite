@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import './AboutStyle.scss';
 
-import { ANCHORS } from '../../common/constants';
+import { ANCHORS, SECTION_ANIMATE } from '../../common/constants';
 import avatar from '../../assests/images/avatar.jpg';
 
 const About = ({ setSectionRefs }) => {
@@ -15,14 +15,14 @@ const About = ({ setSectionRefs }) => {
     useEffect(() => {
         setSectionRefs((prevSectionRefs) => ({
             ...prevSectionRefs,
-            [ANCHORS[1]]: [
+            [ANCHORS[1]]: SECTION_ANIMATE[ANCHORS[1]]([
                 headingAbout,
                 lineAbout,
                 imgAboutContainer,
                 textAbout,
                 blockAbout,
                 rightContainerAbout,
-            ],
+            ]),
         }));
     }, []);
 
