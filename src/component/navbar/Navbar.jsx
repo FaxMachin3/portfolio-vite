@@ -22,43 +22,32 @@ const Navbar = ({ destination, setDestination, theme, setTheme }) => {
     };
 
     return (
-        <nav className="nav-bar">
-            <h1 className={`logo  ${hamOpen ? 'animate-hamburger' : ''}`}>
+        <nav className={`nav-bar${hamOpen ? ' animate-hamburger' : ''}`}>
+            <h1 className="logo">
                 <a href="#home">SR</a>
             </h1>
 
             <div className="hamburger" onClick={onHamburgerClick}>
                 <div
-                    className={`nav-circle ${
-                        hamOpen ? 'animate-hamburger' : ''
-                    }`}
+                    className="nav-circle"
                 ></div>
                 <div
-                    className={`ham upper-layer ${
-                        hamOpen ? 'animate-hamburger' : ''
-                    }`}
+                    className="ham upper-layer"
                 ></div>
                 <div
-                    className={`ham middle-layer ${
-                        hamOpen ? 'animate-hamburger' : ''
-                    }`}
+                    className="ham middle-layer"
                 ></div>
                 <div
-                    className={`ham lower-layer ${
-                        hamOpen ? 'animate-hamburger' : ''
-                    }`}
+                    className="ham lower-layer"
                 ></div>
             </div>
 
             <ul
-                className={`nav-links  ${hamOpen ? 'animate-hamburger' : ''}`}
+                className="nav-links"
                 onClick={onLinkClick}
             >
                 {LINK.map(({ text, anchor }) => (
-                    <li
-                        className={`${hamOpen ? 'animate-hamburger' : ''}`}
-                        key={anchor}
-                    >
+                    <li key={anchor}>
                         <a
                             className={`${anchor} link ${
                                 destination === anchor ? 'active' : ''
@@ -70,11 +59,7 @@ const Navbar = ({ destination, setDestination, theme, setTheme }) => {
                     </li>
                 ))}
 
-                <li
-                    className={`toggle-button ${
-                        hamOpen ? 'animate-hamburger' : ''
-                    }`}
-                >
+                <li className="toggle-button">
                     <ToggleButton
                         setHamOpen={setHamOpen}
                         theme={theme}

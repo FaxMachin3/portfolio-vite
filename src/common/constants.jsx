@@ -9,12 +9,12 @@ import skillAnimate from '../animate/SkillAnimate';
 import projectAnimate from '../animate/ProjectAnimate';
 import contactAnimate from '../animate/ContactAnimate';
 
-import DarkWeather from '../assests/images/darkWeather.jpg';
+import DarkWeather from '../assests/images/dark-weather.jpg';
 import Socialize from '../assests/images/socialize.jpg';
-import GetYourDreamJob from '../assests/images/getYourDreamJob.png';
-import MyPortfolio from '../assests/images/myPortfolio.jpg';
-import BookMyEvent from '../assests/images/bookMyEvent.jpg';
-import APS from '../assests/images/APS.jpg';
+import GetYourDreamJob from '../assests/images/get-your-dream-job.jpg';
+import MyPortfolio from '../assests/images/my-portfolio.jpg';
+import BookMyEvent from '../assests/images/book-my-event.jpg';
+import APS from '../assests/images/aps.jpg';
 
 import ContactSVGInstagram from '../component/contact/ContactSVGInstagram';
 import ContactSVGLinkedin from '../component/contact/ContactSVGLinkedin';
