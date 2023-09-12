@@ -14,7 +14,7 @@ import Socialize from '../assests/images/socialize.jpg';
 import GetYourDreamJob from '../assests/images/get-your-dream-job.jpg';
 import MyPortfolio from '../assests/images/my-portfolio.jpg';
 import BookMyEvent from '../assests/images/book-my-event.jpg';
-import APS from '../assests/images/aps.jpg';
+import APS from '../assests/images/arizona-public-service.jpg';
 
 import ContactSVGInstagram from '../component/contact/ContactSVGInstagram';
 import ContactSVGLinkedin from '../component/contact/ContactSVGLinkedin';
