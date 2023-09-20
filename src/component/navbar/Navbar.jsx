@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useRef, useEffect } from "react";
 import { gsap, Power2 } from "gsap";
 import { LINK, SLIDE_DELAY } from "../../common/constants";
 import useThrottle from "../../hooks/useThrottle";
@@ -15,84 +15,79 @@ const Navbar = ({ destination, setDestination, theme, setTheme }) => {
   const lowerLayerRef = useRef(null);
   const linksRef = useRef(new Array(LINK.length));
   const toggleRef = useRef(null);
-
-  const navCircleGsap = useRef(null);
-  const upperLayerGsap = useRef(null);
-  const middleLayerGsap = useRef(null);
-  const lowerLayerGsap = useRef(null);
-  const linksGsap = useRef(null);
-  const toggleGsap = useRef(null);
+  const navbarGsapTimeline = useRef(null);
 
   useEffect(() => {
     const gsapContext = gsap.context(() => {
-      navCircleGsap.current = gsap.to(navCircleRef.current, {
-        duration: 0.5,
-        ease: Power2.easeOut,
-        x: -200,
-        y: 250,
-      });
-      middleLayerGsap.current = gsap.to(middleLayerRef.current, {
-        duration: 0.5,
-        ease: Power2.easeInOut,
-        x: 100,
-        alpha: 0,
-      });
-      upperLayerGsap.current = gsap.to(upperLayerRef.current, {
-        duration: 0.5,
-        ease: Power2.easeInOut,
-        y: "1rem",
-        rotate: "45deg",
-      });
-      lowerLayerGsap.current = gsap.to(lowerLayerRef.current, {
-        duration: 0.5,
-        ease: Power2.easeInOut,
-        y: "-1rem",
-        rotate: "-45deg",
-      });
-      linksGsap.current = gsap.to(linksRef.current, {
-        ease: Power2.easeInOut,
-        y: 0,
-        opacity: 1,
-        pointerEvents: "all",
-        stagger: { each: 0.03 },
-      });
-      toggleGsap.current = gsap.to(toggleRef.current, {
-        duration: 0.5,
-        ease: Power2.easeInOut,
-        x: 0,
-        pointerEvents: "all",
-        opacity: 1,
+      navbarGsapTimeline.current = gsap.timeline({
+        paused: true,
+        defaults: {
+          duration: 0.5,
+          ease: Power2.easeInOut,
+        },
       });
 
-      navCircleGsap.current.pause();
-      middleLayerGsap.current.pause();
-      upperLayerGsap.current.pause();
-      lowerLayerGsap.current.pause();
-      linksGsap.current.pause();
-      toggleGsap.current.pause();
+      navbarGsapTimeline.current
+        ?.to(navCircleRef.current, {
+          ease: Power2.easeOut,
+          x: -200,
+          y: 250,
+        })
+        .to(
+          middleLayerRef.current,
+          {
+            x: 100,
+            opacity: 0,
+          },
+          "<"
+        )
+        .to(
+          upperLayerRef.current,
+          {
+            y: "1rem",
+            rotate: "45deg",
+          },
+          "<"
+        )
+        .to(
+          lowerLayerRef.current,
+          {
+            y: "-1rem",
+            rotate: "-45deg",
+          },
+          "<"
+        )
+        .to(
+          linksRef.current,
+          {
+            y: 0,
+            opacity: 1,
+            pointerEvents: "all",
+            stagger: { each: 0.03 },
+          },
+          "<"
+        )
+        .to(
+          toggleRef.current,
+          {
+            x: 0,
+            pointerEvents: "all",
+            opacity: 1,
+          },
+          "<"
+        );
     });
 
     return () => {
+      navbarGsapTimeline.current?.kill();
       gsapContext?.revert();
     };
   }, []);
 
   const toggleNav = (isHamOpen = true) => {
-    if (isHamOpen) {
-      navCircleGsap.current.play();
-      middleLayerGsap.current.play();
-      upperLayerGsap.current.play();
-      lowerLayerGsap.current.play();
-      linksGsap.current.play();
-      toggleGsap.current.play();
-    } else {
-      navCircleGsap.current.reverse();
-      middleLayerGsap.current.reverse();
-      upperLayerGsap.current.reverse();
-      lowerLayerGsap.current.reverse();
-      linksGsap.current.reverse();
-      toggleGsap.current.reverse();
-    }
+    isHamOpen
+      ? navbarGsapTimeline.current?.play()
+      : navbarGsapTimeline.current?.reverse();
   };
 
   const onLinkClick = useThrottle((e) => {
@@ -142,7 +137,11 @@ const Navbar = ({ destination, setDestination, theme, setTheme }) => {
         ))}
 
         <li ref={toggleRef} className="toggle-button">
-          <ToggleButton toggleNav={toggleNav} theme={theme} setTheme={setTheme} />
+          <ToggleButton
+            toggleNav={toggleNav}
+            theme={theme}
+            setTheme={setTheme}
+          />
         </li>
       </ul>
     </nav>
